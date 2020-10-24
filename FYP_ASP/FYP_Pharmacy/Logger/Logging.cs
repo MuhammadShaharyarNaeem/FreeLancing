@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace Logger
@@ -22,7 +21,7 @@ namespace Logger
             AppendSeparator();
 
             if (!string.IsNullOrWhiteSpace(WebPage))
-            { 
+            {
                 FunctionalLog.Append("WebPage: " + WebPage);
                 AppendSeparator();
             }
@@ -30,7 +29,7 @@ namespace Logger
             FunctionalLog.Append("Exception: " + Ex.Message);
             FunctionalLog.Append(Environment.NewLine);
             Log.Append(FunctionalLog);
-            
+
         }
 
         public void LogInfo(string Context, string Class, string Info, string WebPage = "")
@@ -57,7 +56,7 @@ namespace Logger
         public void LogFunction(string Context, string FunctionName, string WebPage = "")
         {
             FunctionalLog = new StringBuilder("[" + DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss") + "] (LogType: Functional) ");
-            
+
             FunctionalLog.Append("Context: " + Context);
             AppendSeparator();
 
@@ -75,7 +74,7 @@ namespace Logger
         public void LogSql(string Context, string Query, string QueryType)
         {
             FunctionalLog = new StringBuilder("[" + DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss") + "] (LogType: Sql) ");
-            
+
             FunctionalLog.Append("Context: " + Context);
             AppendSeparator();
 
