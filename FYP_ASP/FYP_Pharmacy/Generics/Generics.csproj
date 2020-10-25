@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\ErrorCache.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlCache.cs" />
+    <Compile Include="Cache\SqlCache.cs" />
     <Compile Include="SQLHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
