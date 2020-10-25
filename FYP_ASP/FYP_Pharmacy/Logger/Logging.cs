@@ -7,7 +7,7 @@ namespace Logger
 {
     public class Logging
     {
-        private StringBuilder Log;
+        private StringBuilder Log = new StringBuilder();
         private StringBuilder FunctionalLog;
         private string LOG_PATH = ConfigurationManager.AppSettings["logpath"].ToString();
         private string LogFileName = "Log_" + DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss");

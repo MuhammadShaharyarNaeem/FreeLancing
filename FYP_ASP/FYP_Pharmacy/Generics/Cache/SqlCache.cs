@@ -1,10 +1,8 @@
 ﻿namespace Generics.Cache
 {
-    public class SqlCache
+    public static class SqlCache
     {
-        public string sql;
-
-        public string GetSql(string queryName)
+        public static string GetSql(string queryName)
         {
             switch (queryName)
             {

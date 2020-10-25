@@ -17,7 +17,7 @@ namespace Generics
         ArrayList Params;
         DataTable dt = new DataTable();
         DataSet ds = new DataSet();
-        MessageCollection Messages = new MessageCollection();
+        public MessageCollection Messages = new MessageCollection();
 
         #endregion
 

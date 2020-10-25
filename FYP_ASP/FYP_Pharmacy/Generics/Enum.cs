@@ -16,5 +16,9 @@
             NonQuery = 2,
             Scalar = 3
         }
+        public enum SessionName
+        {
+            AccountSetup
+        };
     }
 }

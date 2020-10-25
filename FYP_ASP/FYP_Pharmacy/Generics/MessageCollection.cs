@@ -9,6 +9,10 @@ namespace Generics
         private List<Message> Messages;
         public bool isErrorOccured;
         Logging log = new Logging();
+        public MessageCollection()
+        {
+            Messages = new List<Message>();
+        }
         public void copyFrom(MessageCollection messageCollection)
         {
             isErrorOccured = messageCollection.isErrorOccured;

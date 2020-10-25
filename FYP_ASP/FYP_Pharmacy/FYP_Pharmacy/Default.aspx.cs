@@ -30,7 +30,17 @@ namespace FYP_Pharmacy
         protected void OnSubmit_Click(object sender, EventArgs e)
         {
             method = MethodBase.GetCurrentMethod();
-            UserLogin login = new UserLogin(txt_login.Text,txt_password.Text);
+            MessageCollection.addMessage(new Message()
+            {
+                Context = CONTEXT,
+                ErrorCode = 0,
+                isError = false,
+                WebPage = PageName,
+                LogType = Generics.Enum.LogType.Functional,
+                Function = method.Name
+            });
+
+            UserLogin login = new UserLogin(txt_login.Text,txt_password.Text,Session);
             login.DoAction();
             MessageCollection.copyFrom(login.MessageCollection);
 
