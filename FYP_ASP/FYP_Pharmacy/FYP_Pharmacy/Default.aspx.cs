@@ -1,13 +1,43 @@
-﻿using System;
-using System.Web.UI;
+﻿using BLL.Login;
+using Generics;
+using System;
+
+using System.Reflection;
 
 namespace FYP_Pharmacy
 {
-    public partial class _Default : Page
+    public partial class _Default : PageActionHandler
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region logging
+            PageName = "Default";
+            CONTEXT = "Login";
+            method = MethodBase.GetCurrentMethod();
+            MessageCollection.addMessage(new Message()
+            {
+                Context = CONTEXT,
+                ErrorCode = 0,
+                isError = false,
+                WebPage = PageName,
+                LogType = Generics.Enum.LogType.Functional,
+                Function = method.Name
+            });
+            #endregion
+        }
 
+        protected void OnSubmit_Click(object sender, EventArgs e)
+        {
+            method = MethodBase.GetCurrentMethod();
+            UserLogin login = new UserLogin(txt_login.Text,txt_password.Text);
+            login.DoAction();
+            MessageCollection.copyFrom(login.MessageCollection);
+
+            if (MessageCollection.isErrorOccured)
+            {
+                MessageCollection.PublishLog();
+            }
         }
     }
 }

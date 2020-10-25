@@ -12,7 +12,7 @@ namespace Logger
         private string LOG_PATH = ConfigurationManager.AppSettings["logpath"].ToString();
         private string LogFileName = "Log_" + DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss");
 
-        public void LogErrorMessage(string Context, string Ex, string WebPage = "")
+        public void LogErrorMessage(string Context, string Ex, int ErrorCode, string WebPage = "")
         {
             FunctionalLog = new StringBuilder("[" + DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss") + "] - (LogType: Exception) ");
 
@@ -25,7 +25,7 @@ namespace Logger
                 AppendSeparator();
             }
 
-            FunctionalLog.Append("ErrorMessage: " + Ex);
+            FunctionalLog.Append("ErrorMessage (ErrorCode: " + ErrorCode + "): " + Ex);
             FunctionalLog.Append(Environment.NewLine);
             Log.Append(FunctionalLog);
 
