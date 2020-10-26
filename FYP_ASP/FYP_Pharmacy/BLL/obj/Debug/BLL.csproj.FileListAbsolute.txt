@@ -9,3 +9,5 @@ E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\BLL\obj\Debug\BLL.csproj.CoreComp
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\BLL\obj\Debug\BLL.csproj.CopyComplete
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\BLL\obj\Debug\BLL.dll
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\BLL\obj\Debug\BLL.pdb
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\BLL\bin\Debug\Models.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\BLL\bin\Debug\Models.pdb

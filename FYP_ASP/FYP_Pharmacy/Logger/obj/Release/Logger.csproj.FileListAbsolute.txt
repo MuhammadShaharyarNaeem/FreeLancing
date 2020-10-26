@@ -1,0 +1,6 @@
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Logger\bin\Release\Logger.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Logger\bin\Release\Logger.pdb
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Logger\obj\Release\Logger.csprojAssemblyReference.cache
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Logger\obj\Release\Logger.csproj.CoreCompileInputs.cache
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Logger\obj\Release\Logger.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Logger\obj\Release\Logger.pdb
