@@ -8,7 +8,7 @@ namespace FYP_Pharmacy
 {
     public partial class _Default : PageActionHandler
     {
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             #region logging
@@ -40,13 +40,19 @@ namespace FYP_Pharmacy
                 Function = method.Name
             });
 
-            UserLogin login = new UserLogin(txt_login.Text,txt_password.Text,Session);
+            UserLogin login = new UserLogin(txt_login.Text, txt_password.Text, Session);
             login.DoAction();
             MessageCollection.copyFrom(login.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
                 MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
+            }
+            else
+            { 
+                Response.Redirect("PharmacyInventory.aspx");
             }
         }
     }

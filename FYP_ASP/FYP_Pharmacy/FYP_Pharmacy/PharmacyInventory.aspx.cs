@@ -2,7 +2,7 @@
 using Generics;
 using System;
 using System.Reflection;
-using System.Web.UI.WebControls;
+using Enum = Generics.Enum;
 
 namespace FYP_Pharmacy
 {
@@ -12,14 +12,12 @@ namespace FYP_Pharmacy
         {
             if (!IsPostBack)
             {
-                gridPharmacy.Visible = false;
+                if (Session == null || Session[Enum.SessionName.AccountSetup.ToString()] == null)
+                {
+                    Response.Redirect("default.aspx");
+                }
             }
-            else
-            {
-                gridPharmacy.Visible = true;
-                getMedData();
-            }
-
+            getMedData();
         }
 
         protected void medicineQRcode_TextChanged(object sender, EventArgs e)
@@ -43,9 +41,20 @@ namespace FYP_Pharmacy
             piHandler.qr_code = qrcode;
             piHandler.DoAction();
             var medicine = piHandler.GetData();
+            this.MessageCollection.copyFrom(piHandler.MessageCollection);
 
-            gridPharmacy.DataSource = medicine;
-            gridPharmacy.DataBind();
+            if (MessageCollection.isErrorOccured)
+            {
+                MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
+            }
+            else
+            {
+                gridPharmacy.DataSource = medicine;
+                gridPharmacy.DataBind();
+                gridPharmacy.Visible = true;
+            }
         }
     }
 }

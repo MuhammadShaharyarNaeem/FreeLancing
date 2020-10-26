@@ -1,12 +1,11 @@
 ﻿using Logger;
 using System.Collections.Generic;
-using System.Security.Policy;
 
 namespace Generics
 {
     public class MessageCollection
     {
-        private List<Message> Messages;
+        public List<Message> Messages;
         public bool isErrorOccured;
         Logging log = new Logging();
         public MessageCollection()

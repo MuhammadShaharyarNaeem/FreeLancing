@@ -4,17 +4,15 @@ using Models.Generic;
 using System;
 using System.Collections;
 using System.Data;
-using System.Net.Mime;
-using System.Web.SessionState;
 
 namespace BLL.PharmacyInventory
 {
     public class PharmacyInventory_Handler : ActionHandler
     {
         public string qr_code;
-        HttpSessionState Session;
         SQLHandler sql;
         DataTable dt;
+
         public override void DoAction()
         {
             ArrayList Params = new ArrayList()
@@ -42,8 +40,6 @@ namespace BLL.PharmacyInventory
                     med.price= dt.Rows[0].Field<double>("price");
                     med.Registrant= dt.Rows[0].Field<string>("registrant");
                     med.Registration_no= dt.Rows[0].Field<string>("registration_no");
-
-                    //Session[Generics.Enum.SessionName.MedicineDetail.ToString()] = med;
                 }
             }
             else
