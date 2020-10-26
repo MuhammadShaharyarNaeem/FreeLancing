@@ -15,7 +15,7 @@
 
                 case "GetMedicineData":
                     return
-                        "select name,batch_no,mfg_date,expiry_date,registration_no,registrant,price from medicine m where qr_code = @arg0";
+                        "select Name,batch_no,MfgDate,ExpiryDate,RegistrationNbr,Registrant,Price from medicine m where QRCode = @arg0";
                 default:
                     return "";
             }

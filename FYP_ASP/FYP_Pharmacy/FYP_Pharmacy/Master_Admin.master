@@ -156,7 +156,7 @@
                         <!-- Product Details-->
 
                         <li class="treeview">
-                            <a href="#">
+                            <a href="~\Forms\PharmacyInventory.aspx">
                                 <i class="fa fa-tasks"></i><span>Medicine</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
