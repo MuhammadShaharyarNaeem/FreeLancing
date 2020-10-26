@@ -9,7 +9,7 @@ namespace Logger
     {
         private StringBuilder Log = new StringBuilder();
         private StringBuilder FunctionalLog;
-        private string LOG_PATH = ConfigurationManager.AppSettings["logpath"].ToString();
+        private string LOG_PATH = string.Empty;
         private string LogFileName = "Log_" + DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss");
 
         public void LogErrorMessage(string Context, string Ex, int ErrorCode, string WebPage = "")
@@ -87,7 +87,7 @@ namespace Logger
 
         public void PublishLog()
         {
-            File.WriteAllText(LOG_PATH + LogFileName, Log.ToString());
+            //File.WriteAllText(LOG_PATH + LogFileName, Log.ToString());
         }
 
         #region HelperMethods

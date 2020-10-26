@@ -43,12 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Login\UserLogin.cs" />
+    <Compile Include="PharmacyInventory\PharmacyInventory_Handler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Generics\Generics.csproj">
       <Project>{24E14A01-A303-475C-B81B-8667638C1D38}</Project>
       <Name>Generics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{080ED6A6-10A7-4750-A489-248423903247}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

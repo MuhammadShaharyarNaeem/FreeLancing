@@ -18,7 +18,8 @@
         }
         public enum SessionName
         {
-            AccountSetup
+            AccountSetup,
+            MedicineDetail
         };
     }
 }
