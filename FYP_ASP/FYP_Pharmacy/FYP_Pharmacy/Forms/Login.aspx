@@ -1,8 +1,8 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"  CodeBehind="Login.aspx.cs" Inherits="FYP_Pharmacy.Forms.Login" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Master_Admin.Master" AutoEventWireup="true"  CodeBehind="Login.aspx.cs" Inherits="FYP_Pharmacy.Forms.Login" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-<link href="content/bootstrap.min.css" rel="stylesheet" type="text/css" />  
-    <div style="margin-top: 50px">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="body" runat="server">
+
+    <div class="container" style="padding-top: 200px">
         <table style="width: 100%">
             <tr>
                 <td style="width: 12%"></td>
