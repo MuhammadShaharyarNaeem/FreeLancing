@@ -5,11 +5,15 @@ using System.Web.SessionState;
 
 namespace BLL.Login
 {
-    public class UserLogin : ActionHandler
+    public class LoginHandler : ActionHandler
     {
+        #region Fields & Properties
         string userName, password;
         HttpSessionState Session;
-        public UserLogin(string UserName, string Password, HttpSessionState session)
+        public string accessLevel { get; set; }
+        #endregion
+
+        public LoginHandler(string UserName, string Password, HttpSessionState session)
         {
             userName = UserName;
             password = Password;
@@ -32,12 +36,10 @@ namespace BLL.Login
             {
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    Session[Enum.SessionName.AccountSetup.ToString()] = dt;
+                    Session[Enum.SessionName.UserDetails.ToString()] = dt;
+                    accessLevel = dt.Rows[0]["accesslevel"].ToString();
                 }
             }
-            else
-                MessageCollection.PublishLog();
-            
         }
     }
 }

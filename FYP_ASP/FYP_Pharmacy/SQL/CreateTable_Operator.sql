@@ -7,7 +7,6 @@ if not exists (select * from sysobjects where name='Operator')
 		ID int not null identity,
 		Name varchar(30),
 		Email varchar(30),
-		Password varchar(30),
 		ContactNumber varchar(30),
 		Description varchar(50),
 		PharmacyID int,

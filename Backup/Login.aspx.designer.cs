@@ -11,26 +11,8 @@ namespace FYP_Pharmacy.Forms
 {
 
 
-    public partial class Users
+    public partial class Login
     {
-
-        /// <summary>
-        /// lbl_title control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_title;
-
-        /// <summary>
-        /// pnl_front control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_front;
 
         /// <summary>
         /// lbl_err control.
@@ -42,21 +24,21 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.Label lbl_err;
 
         /// <summary>
-        /// btn_AddNew control.
+        /// txt_login control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_AddNew;
+        protected global::System.Web.UI.WebControls.TextBox txt_login;
 
         /// <summary>
-        /// gridPharmacy control.
+        /// txt_password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridPharmacy;
+        protected global::System.Web.UI.WebControls.TextBox txt_password;
     }
 }

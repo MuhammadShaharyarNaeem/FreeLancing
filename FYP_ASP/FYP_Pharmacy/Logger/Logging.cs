@@ -91,7 +91,7 @@ namespace Logger
             {
                 Directory.CreateDirectory(LOG_PATH);
             }
-            File.WriteAllText(LOG_PATH + LogFileName, Log.ToString());
+            //File.WriteAllText(LOG_PATH + LogFileName, Log.ToString());
         }
 
         #region HelperMethods

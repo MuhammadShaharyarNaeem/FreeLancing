@@ -60,10 +60,14 @@ namespace Generics
                 {
                     using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
-                        for (int i = 0; i < Params.Count; i++)
+                        if (Params != null)
                         {
-                            sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            for (int i = 0; i < Params.Count; i++)
+                            {
+                                sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            }
                         }
+                        
 
                         SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                         da.Fill(ds);
@@ -116,9 +120,12 @@ namespace Generics
                 {
                     using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
-                        for (int i = 0; i < Params.Count; i++)
+                        if (Params != null)
                         {
-                            sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            for (int i = 0; i < Params.Count; i++)
+                            {
+                                sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            }
                         }
 
                         sqlCommand.ExecuteNonQuery();
@@ -172,10 +179,14 @@ namespace Generics
                 {
                     using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
-                        for (int i = 0; i < Params.Count; i++)
+                        if (Params != null)
                         {
-                            sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            for (int i = 0; i < Params.Count; i++)
+                            {
+                                sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            }
                         }
+
                         Id = Convert.ToInt32(sqlCommand.ExecuteScalar());
                         sqlConnection.Close();
                     }
