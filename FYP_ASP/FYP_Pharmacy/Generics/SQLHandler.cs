@@ -17,10 +17,15 @@ namespace Generics
         ArrayList Params;
         DataTable dt = new DataTable();
         DataSet ds = new DataSet();
-        MessageCollection Messages = new MessageCollection();
+        public MessageCollection Messages = new MessageCollection();
 
         #endregion
 
+        //Default Constructor if the Query Doesnt Require Params
+        public SQLHandler()
+        { }
+
+        //Constructor if the Query Requires Params
         public SQLHandler(ArrayList Params)
         {
             this.Params = Params;
@@ -55,6 +60,15 @@ namespace Generics
                 {
                     using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
+                        if (Params != null)
+                        {
+                            for (int i = 0; i < Params.Count; i++)
+                            {
+                                sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            }
+                        }
+                        
+
                         SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                         da.Fill(ds);
                         dt = ds.Tables[0];
@@ -106,6 +120,14 @@ namespace Generics
                 {
                     using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
+                        if (Params != null)
+                        {
+                            for (int i = 0; i < Params.Count; i++)
+                            {
+                                sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            }
+                        }
+
                         sqlCommand.ExecuteNonQuery();
                         sqlConnection.Close();
                     }
@@ -157,6 +179,14 @@ namespace Generics
                 {
                     using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
+                        if (Params != null)
+                        {
+                            for (int i = 0; i < Params.Count; i++)
+                            {
+                                sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
+                            }
+                        }
+
                         Id = Convert.ToInt32(sqlCommand.ExecuteScalar());
                         sqlConnection.Close();
                     }

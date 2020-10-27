@@ -72,3 +72,11 @@ E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\obj\Debug\FYP_Pharma
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\obj\Debug\FYP_Pharmacy.csproj.CopyComplete
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\obj\Debug\FYP_Pharmacy.dll
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\obj\Debug\FYP_Pharmacy.pdb
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\BLL.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\Generics.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\Logger.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\BLL.pdb
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\Generics.pdb
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\Logger.pdb
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\Models.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\FYP_Pharmacy\bin\Models.pdb
