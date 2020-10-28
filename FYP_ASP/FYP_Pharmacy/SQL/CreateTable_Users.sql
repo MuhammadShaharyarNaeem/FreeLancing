@@ -8,9 +8,11 @@ if not exists (select * from sysobjects where name='Users')
 		LoginName varchar(30),
 		Password varchar(30),
 		AccessLevel int,
-		OperatorID int null,
+		PharmaCompanyID int,
+		OperatorID int,
 		constraint [PK_UserID] primary key clustered (ID),
-		constraint [FK_OperatorID] foreign key (OperatorID) references Operator(ID)
+		constraint [FK_Users_PharmaCompanyID] foreign key (PharmaCompanyID) references PharmaCompany(ID),
+		constraint [FK_Users_OperatorID] foreign key (OperatorID) references Pharmacy(ID)
 	)
 
 
