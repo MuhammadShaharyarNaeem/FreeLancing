@@ -11,7 +11,7 @@ namespace FYP_Pharmacy.Forms
         {
             if (!IsPostBack)
             {
-                if (Session == null || Session[Generics.Enum.SessionName.AccountSetup.ToString()] == null)
+                if (Session == null || Session[Generics.Enums.SessionName.AccountSetup.ToString()] == null)
                 {
                     Response.Redirect("login.aspx");
                 }
@@ -32,7 +32,7 @@ namespace FYP_Pharmacy.Forms
                 ErrorCode = 0,
                 isError = false,
                 WebPage = PageName,
-                LogType = Generics.Enum.LogType.Functional,
+                LogType = Generics.Enums.LogType.Functional,
                 Function = method.Name
             });
             string qrcode = medicineQRcode.Text;

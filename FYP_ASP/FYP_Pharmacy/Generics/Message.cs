@@ -8,9 +8,9 @@
         public string Function { get; set; }
         public string WebPage { get; set; }
         public bool isError { get; set; }
-        public Enum.LogType LogType { get; set; }
+        public Enums.LogType LogType { get; set; }
         public string Query { get; set; }
-        public Enum.QueryType QueryType { get; set; }
+        public Enums.QueryType QueryType { get; set; }
         
     }
 }

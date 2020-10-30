@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Users.aspx.cs" Inherits="FYP_Pharmacy.Forms.Users" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master"  CodeBehind="PharmaCompany.aspx.cs" Inherits="FYP_Pharmacy.Forms.PharmaCompany" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <h3 class="page-header">
-        <asp:Label runat="server" ID="lbl_title" CssClass="jumbotron" Width="100%" Text="Admin Users Panel" Font-Bold="true"></asp:Label>
+        <asp:Label runat="server" ID="lbl_title" CssClass="jumbotron" Width="100%" Text="Admin PharmaCompany Panel" Font-Bold="true"></asp:Label>
     </h3>
     <h4>
         <asp:Label runat="server" ID="lbl_err" Visible="False" Style="color: #ff0000" CssClass="form-label" Font-Bold="true" />
@@ -41,8 +41,10 @@
                             <Columns>
                                 <asp:BoundField runat="server" DataField="ID" HeaderText="ID"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="Name" HeaderText="Name"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="AccessLevel" HeaderText="AccessLevel"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="Company" HeaderText="Company/Pharmacy"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="Email" HeaderText="Email"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="ContactNumber" HeaderText="ContactNumber"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="Description" HeaderText="Description"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="Address" HeaderText="Address"></asp:BoundField>
                                 <asp:ButtonField runat="server" ButtonType="Button" Text="Edit" ControlStyle-CssClass="btn btn-primary" CommandName="EditRow" ItemStyle-Width="10%"/>
                                 <asp:ButtonField runat="server" ButtonType="Button" Text="delete" ControlStyle-CssClass="btn btn-primary" CommandName="DeleteRow" ItemStyle-Width="10%"/>
                             </Columns>
@@ -81,20 +83,16 @@
                 </tr>
                 <tr>
                     <td style="text-align:center">
-                        <asp:Label runat="server" Text ="UserName " CssClass="form-label" />
+                        <asp:Label runat="server" Text ="Name " CssClass="form-label" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txt_usr" CssClass="form-control"/>
+                        <asp:TextBox runat="server" ID="txt_name" CssClass="form-control"/>
                     </td>
                     <td style="text-align:center">
-                        <asp:Label runat="server" Text ="AccessLevel" CssClass="form-label" />
+                        <asp:Label runat="server" Text ="ContactNumber" CssClass="form-label" />
                     </td>
-                    <td colspan="2">
-                        <asp:DropDownList runat="server" ID="ddl_accesslevel" CssClass="form-control" OnSelectedIndexChanged="ddl_accesslevel_SelectedIndexChanged" AutoPostBack="true">
-                            <asp:ListItem Text="Admin" Value="1001" Selected="True"/>
-                            <asp:ListItem Text="CompanyAdmin" Value="1002" />
-                            <asp:ListItem Text="Operator" Value="1003"/>
-                        </asp:DropDownList>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_cnumber" CssClass="form-control"/>
                     </td>
                     <td></td>
                     <td></td>
@@ -103,21 +101,37 @@
                 </tr>
                 <tr>
                     <td style="text-align:center">
-                        <asp:Label runat="server" Text ="Password" CssClass="form-label" />
+                        <asp:Label runat="server" Text ="Email" CssClass="form-label" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txt_pw" CssClass="form-control" TextMode="Password" />
+                        <asp:TextBox runat="server" ID="txt_email" CssClass="form-control"/>
                     </td>
                     <td style="text-align:center">
-                        <asp:Label runat="server" Text ="Company/Pharmacy" CssClass="form-label" />
+                        <asp:Label runat="server" Text ="Description" CssClass="form-label" />
                     </td>
                     <td colspan="2">
-                        <asp:DropDownList runat="server" ID="ddl_Company" CssClass="form-control" Enabled="false"/>
+                        <asp:TextBox runat="server" ID="txt_desc" CssClass="form-control"/>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:Label runat="server" Text ="Address" CssClass="form-label" />
+                    </td>
+                    <td colspan="2" rowspan="2">
+                        <asp:TextBox runat="server" ID="txt_addr" TextMode="MultiLine" CssClass="form-control"/>
                     </td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
                 </tr>
                 <tr>
                     <td></td>

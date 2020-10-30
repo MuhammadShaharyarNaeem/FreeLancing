@@ -11,7 +11,7 @@ namespace FYP_Pharmacy.Forms
 {
 
 
-    public partial class Users
+    public partial class PharmaCompany
     {
 
         /// <summary>
@@ -78,40 +78,49 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.TextBox txt_id;
 
         /// <summary>
-        /// txt_usr control.
+        /// txt_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_usr;
+        protected global::System.Web.UI.WebControls.TextBox txt_name;
 
         /// <summary>
-        /// ddl_accesslevel control.
+        /// txt_cnumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_accesslevel;
+        protected global::System.Web.UI.WebControls.TextBox txt_cnumber;
 
         /// <summary>
-        /// txt_pw control.
+        /// txt_email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_pw;
+        protected global::System.Web.UI.WebControls.TextBox txt_email;
 
         /// <summary>
-        /// ddl_Company control.
+        /// txt_desc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_Company;
+        protected global::System.Web.UI.WebControls.TextBox txt_desc;
+
+        /// <summary>
+        /// txt_addr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_addr;
 
         /// <summary>
         /// btn_SaveUpdDel control.

@@ -1,15 +1,17 @@
 ﻿using Generics;
 using Generics.Cache;
 using System.Collections;
+using System.Data;
 using System.Web.SessionState;
 
 namespace BLL.Login
 {
-    public class LoginHandler : ActionHandler
+    public class LoginHandler : ActionHandler<object>
     {
         #region Fields & Properties
         string userName, password;
         HttpSessionState Session;
+        public DataTable dt = new DataTable();
         public string accessLevel { get; set; }
         #endregion
 
@@ -29,17 +31,54 @@ namespace BLL.Login
             };
 
             SQLHandler sql = new SQLHandler(Params);
-            var dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("UserLogin"));
+            dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("UserLogin"));
 
             MessageCollection.copyFrom(sql.Messages);
             if (!MessageCollection.isErrorOccured)
             {
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    Session[Enum.SessionName.UserDetails.ToString()] = dt;
+                    Session[Enums.SessionName.UserDetails.ToString()] = dt;
                     accessLevel = dt.Rows[0]["accesslevel"].ToString();
                 }
+                else if (dt == null || dt.Rows.Count <= 0)
+                {
+                    MessageCollection.addMessage(new Message()
+                    {
+                        Context = "LoginHandler",
+                        ErrorCode = ErrorCache.LoginFailed,
+                        ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.LoginFailed),
+                        isError = true,
+                        LogType = Enums.LogType.Exception,
+                        WebPage = "Login"
+                    });
+                }
             }
+        }
+
+        public override void DoFillGridAction()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void DoFillBackPanelAction(int ID)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Insert(object Model)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Update(object Model)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Delete(int ID)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Login\LoginHandler.cs" />
-    <Compile Include="PharmacyInventory\PharmacyInventory_Handler.cs" />
+    <Compile Include="PharmaCompany\PharmaCompanyHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\UsersHandler.cs" />
   </ItemGroup>
@@ -56,6 +56,9 @@
       <Project>{080ED6A6-10A7-4750-A489-248423903247}</Project>
       <Name>Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PharmacyInventory\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

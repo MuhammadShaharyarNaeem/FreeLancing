@@ -2,19 +2,19 @@
 using System.Data;
 using System.Reflection;
 using Generics;
-using BLL.Users;
-using Models.Users;
+using BLL.PharmaCompany;
+using Models.PharmaCompany;
 using System.Web.UI.WebControls;
 
 namespace FYP_Pharmacy.Forms
 {
-    public partial class Users : PageActionHandler
+    public partial class PharmaCompany : PageActionHandler
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             #region logging
-            PageName = "Users";
-            CONTEXT = "Users";
+            PageName = "PharmaCompany";
+            CONTEXT = "PharmaCompany";
             method = MethodBase.GetCurrentMethod();
             MessageCollection.addMessage(new Message()
             {
@@ -41,7 +41,6 @@ namespace FYP_Pharmacy.Forms
 
             FillGrid();
         }
-
         #region Click Actions
         protected void AddNew_Click(object sender, EventArgs e)
         {
@@ -78,44 +77,13 @@ namespace FYP_Pharmacy.Forms
         }
         #endregion
 
-        protected void ddl_accesslevel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ddl_accesslevel.SelectedValue == "1001")
-            {
-                ddl_Company.DataSource = null;
-                ddl_Company.DataBind();
-                ddl_Company.Enabled = false;
-            }
-            else
-            {
-                UsersHandler usersHandler = new UsersHandler();
-                usersHandler.FillCompanyDllAction(Convert.ToInt32(ddl_accesslevel.SelectedValue));
-                DataTable ddlData = usersHandler.dt;
-                MessageCollection.copyFrom(usersHandler.MessageCollection);
-
-                if (MessageCollection.isErrorOccured)
-                {
-                    MessageCollection.PublishLog();
-                    lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
-                    lbl_err.Visible = true;
-                }
-                else
-                {
-                    ddl_Company.DataSource = ddlData;
-                    ddl_Company.DataTextField = "Name";
-                    ddl_Company.DataValueField = "ID";
-                    ddl_Company.DataBind();
-                }
-            }
-        }
-
         #region DML Methods
         public void DoSaveAction()
         {
             var Model = MapToObject();
-            UsersHandler usersHandler = new UsersHandler();
-            usersHandler.Insert(Model);
-            MessageCollection.copyFrom(usersHandler.MessageCollection);
+            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
+            PharmaCompanyHandler.Insert(Model);
+            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -133,9 +101,9 @@ namespace FYP_Pharmacy.Forms
         public void DoUpdateAction()
         {
             var Model = MapToObject();
-            UsersHandler usersHandler = new UsersHandler();
-            usersHandler.Update(Model);
-            MessageCollection.copyFrom(usersHandler.MessageCollection);
+            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
+            PharmaCompanyHandler.Update(Model);
+            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -151,9 +119,9 @@ namespace FYP_Pharmacy.Forms
         }
         public void DoDeleteAction()
         {
-            UsersHandler usersHandler = new UsersHandler();
-            usersHandler.Delete(Convert.ToInt32(txt_id.Text));
-            MessageCollection.copyFrom(usersHandler.MessageCollection);
+            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
+            PharmaCompanyHandler.Delete(Convert.ToInt32(txt_id.Text));
+            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -172,31 +140,35 @@ namespace FYP_Pharmacy.Forms
         #region HelperMethods
         public void EmptyFields()
         {
-            txt_usr.Text = string.Empty;
-            txt_pw.Text = string.Empty;
+            txt_addr.Text = string.Empty;
+            txt_cnumber.Text = string.Empty;
+            txt_desc.Text = string.Empty;
+            txt_email.Text = string.Empty;
+            txt_name.Text = string.Empty;
             txt_id.Text = string.Empty;
-            txt_pw.Attributes["value"] = string.Empty;
-            ddl_accesslevel.SelectedIndex = 0;
         }
         public void DisableControls()
         {
-            txt_pw.Enabled = false;
-            txt_usr.Enabled = false;
-            ddl_accesslevel.Enabled = false;
-            ddl_Company.Enabled = false;
+            txt_addr.Enabled = false;
+            txt_cnumber.Enabled = false;
+            txt_desc.Enabled = false;
+            txt_email.Enabled = false;
+            txt_name.Enabled = false;
         }
         public void EnableControls()
         {
-            txt_pw.Enabled = true;
-            txt_usr.Enabled = true;
-            ddl_accesslevel.Enabled = true;
+            txt_addr.Enabled = true;
+            txt_cnumber.Enabled = true;
+            txt_desc.Enabled = true;
+            txt_email.Enabled = true;
+            txt_name.Enabled = true;
         }
         public void FillGrid()
         {
-            UsersHandler usersHandler = new UsersHandler();
-            usersHandler.DoFillGridAction();
-            DataTable gridData = usersHandler.dt;
-            MessageCollection.copyFrom(usersHandler.MessageCollection);
+            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
+            PharmaCompanyHandler.DoFillGridAction();
+            DataTable gridData = PharmaCompanyHandler.dt;
+            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -208,13 +180,14 @@ namespace FYP_Pharmacy.Forms
             gridPharmacy.DataSource = gridData;
             gridPharmacy.DataBind();
 
+
         }
         public void FillFields(int ID)
         {
-            UsersHandler usersHandler = new UsersHandler();
-            usersHandler.DoFillBackPanelAction(ID);
-            DataTable UserData = usersHandler.dt;
-            MessageCollection.copyFrom(usersHandler.MessageCollection);
+            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
+            PharmaCompanyHandler.DoFillBackPanelAction(ID);
+            DataTable Data = PharmaCompanyHandler.dt;
+            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -224,22 +197,23 @@ namespace FYP_Pharmacy.Forms
             }
             else
             {
-                txt_id.Text = UserData.Rows[0]["ID"].ToString();
-                txt_usr.Text = UserData.Rows[0]["Name"].ToString();
-                txt_pw.Attributes.Add("value", UserData.Rows[0]["Password"].ToString());
-                ddl_accesslevel.SelectedValue = UserData.Rows[0]["AccessLevel"].ToString();
-                ddl_accesslevel_SelectedIndexChanged(this, null);
-                ddl_Company.SelectedValue = UserData.Rows[0]["Company"].ToString();
+                txt_addr.Text = Data.Rows[0]["Address"].ToString();
+                txt_cnumber.Text = Data.Rows[0]["ContactNumber"].ToString();
+                txt_desc.Text = Data.Rows[0]["Description"].ToString();
+                txt_email.Text = Data.Rows[0]["Email"].ToString();
+                txt_name.Text = Data.Rows[0]["Name"].ToString();
+                txt_id.Text = Data.Rows[0]["ID"].ToString();
             }
         }
-        public UserModel MapToObject()
+        public PharmaCompanyModel MapToObject()
         {
-            return new UserModel()
+            return new PharmaCompanyModel()
             {
-                AccessLevel = Convert.ToInt32(ddl_accesslevel.SelectedValue),
-                CompanyKey = ddl_Company.SelectedValue,
-                Name = txt_usr.Text.Trim(),
-                Password = txt_pw.Text,
+                Address = txt_addr.Text,
+                ContactNumber = txt_cnumber.Text,
+                Description = txt_desc.Text,
+                Email = txt_email.Text,
+                Name = txt_name.Text,
                 ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text)
             };
         }

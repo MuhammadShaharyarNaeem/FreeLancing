@@ -1,6 +1,6 @@
 ﻿namespace Generics
 {
-    public static class Enum
+    public static class Enums
     {
         public enum LogType
         {
@@ -22,5 +22,25 @@
             UserDetails,
             MedicineDetail
         };
+
+        public enum AccessLevel
+        {
+            Admin = 1001,
+            CompanyAdmin = 1002,
+            Operator = 1003
+        }
+        
+        public enum ButtonControl
+        {
+            Save,
+            Update,
+            Delete
+        }
+        
+        public enum GridCommand
+        { 
+            EditRow,
+            DeleteRow
+        }
     }
 }

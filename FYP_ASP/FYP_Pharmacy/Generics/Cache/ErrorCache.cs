@@ -19,6 +19,9 @@
         public const int RecordsNotFound = 2000002;
         private static readonly string RecordsNotFoundString = "No Records Found";
 
+        public const int LoginFailed = 2000003;
+        private static readonly string LoginFailedString = "Username or Password is incorrect";
+
         private static readonly string UnHandledErrorString = "UnHandled Error Occured";
         public static string getErrorMessage(int ErrorCode)
         {
@@ -28,6 +31,7 @@
                 case GeneralSqlError: return GeneralSqlErrorString;
                 case SqlConnectionError: return SqlConnectionErrorString;
                 case RecordsNotFound: return RecordsNotFoundString;
+                case LoginFailed: return LoginFailedString;
                 default:
                     return UnHandledErrorString;
             }

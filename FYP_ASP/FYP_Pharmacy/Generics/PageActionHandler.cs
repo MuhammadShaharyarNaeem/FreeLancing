@@ -4,7 +4,7 @@ using System.Web.UI;
 
 namespace Generics
 {
-    public class PageActionHandler : Page
+    public abstract class PageActionHandler : Page
     {
         protected MessageCollection MessageCollection = new MessageCollection();
         protected string PageName;
