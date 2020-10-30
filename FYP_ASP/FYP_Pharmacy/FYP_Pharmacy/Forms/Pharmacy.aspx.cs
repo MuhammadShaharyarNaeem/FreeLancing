@@ -1,6 +1,6 @@
-﻿using BLL.PharmaCompany;
+﻿using BLL.Pharmacy;
 using Generics;
-using Models.PharmaCompany;
+using Models.Pharmacy;
 using System;
 using System.Data;
 using System.Reflection;
@@ -8,13 +8,13 @@ using System.Web.UI.WebControls;
 
 namespace FYP_Pharmacy.Forms
 {
-    public partial class PharmaCompany : PageActionHandler
+    public partial class Pharmacy : PageActionHandler
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             #region logging
-            PageName = "PharmaCompany";
-            CONTEXT = "PharmaCompany";
+            PageName = "Pharmacy";
+            CONTEXT = "Pharmacy";
             method = MethodBase.GetCurrentMethod();
             MessageCollection.addMessage(new Message()
             {
@@ -81,9 +81,9 @@ namespace FYP_Pharmacy.Forms
         public void DoSaveAction()
         {
             var Model = MapToObject();
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.Insert(Model);
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyHandler PharmacyHandler = new PharmacyHandler();
+            PharmacyHandler.Insert(Model);
+            MessageCollection.copyFrom(PharmacyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -101,9 +101,9 @@ namespace FYP_Pharmacy.Forms
         public void DoUpdateAction()
         {
             var Model = MapToObject();
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.Update(Model);
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyHandler PharmacyHandler = new PharmacyHandler();
+            PharmacyHandler.Update(Model);
+            MessageCollection.copyFrom(PharmacyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -119,9 +119,9 @@ namespace FYP_Pharmacy.Forms
         }
         public void DoDeleteAction()
         {
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.Delete(Convert.ToInt32(txt_id.Text));
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyHandler PharmacyHandler = new PharmacyHandler();
+            PharmacyHandler.Delete(Convert.ToInt32(txt_id.Text));
+            MessageCollection.copyFrom(PharmacyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -165,10 +165,10 @@ namespace FYP_Pharmacy.Forms
         }
         public void FillGrid()
         {
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.DoFillGridAction();
-            DataTable gridData = PharmaCompanyHandler.dt;
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyHandler PharmacyHandler = new PharmacyHandler();
+            PharmacyHandler.DoFillGridAction();
+            DataTable gridData = PharmacyHandler.dt;
+            MessageCollection.copyFrom(PharmacyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -184,10 +184,10 @@ namespace FYP_Pharmacy.Forms
         }
         public void FillFields(int ID)
         {
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.DoFillBackPanelAction(ID);
-            DataTable Data = PharmaCompanyHandler.dt;
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyHandler PharmacyHandler = new PharmacyHandler();
+            PharmacyHandler.DoFillBackPanelAction(ID);
+            DataTable Data = PharmacyHandler.dt;
+            MessageCollection.copyFrom(PharmacyHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -205,9 +205,9 @@ namespace FYP_Pharmacy.Forms
                 txt_id.Text = Data.Rows[0]["ID"].ToString();
             }
         }
-        public PharmaCompanyModel MapToObject()
+        public PharmacyModel MapToObject()
         {
-            return new PharmaCompanyModel()
+            return new PharmacyModel()
             {
                 Address = txt_addr.Text,
                 ContactNumber = txt_cnumber.Text,

@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.IO;
-using System.Data;
-using Models;
 
 public partial class Site2 : System.Web.UI.MasterPage
 {
@@ -16,23 +9,23 @@ public partial class Site2 : System.Web.UI.MasterPage
         //if (IsPostBack != true)
         //{
 
-            if (CheckSessions())
+        if (CheckSessions())
+        {
+
+
+            if (Convert.ToString(Session["User_Type"]) == "User")
             {
 
-              
-                if (Convert.ToString(Session["User_Type"]) == "User")
-                {
-                    
-                }
-               
-
             }
-            else
-            {
 
-                ClearSessions();
-                
-            }
+
+        }
+        else
+        {
+
+            ClearSessions();
+
+        }
         //}
 
         //ClearSessions();
@@ -79,5 +72,5 @@ public partial class Site2 : System.Web.UI.MasterPage
         string PageName = Path.GetFileName(Request.Path);
         Response.Redirect(PageName);
     }
-  
+
 }

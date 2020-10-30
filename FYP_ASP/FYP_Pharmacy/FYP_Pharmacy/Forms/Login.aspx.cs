@@ -62,7 +62,7 @@ namespace FYP_Pharmacy.Forms
                 lbl_err.Text = "LoginName and Password cannot be empty";
                 lbl_err.Visible = true;
             }
-            
+
         }
     }
 }

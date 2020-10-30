@@ -8,10 +8,7 @@ if not exists (select * from sysobjects where name='Medicine')
 		QRCode varchar(250),
 		ExpiryDate datetime,
 		MfgDate datetime,
-		Quantity int,
 		BatchNo int,
-		RegistrationNbr int,
-		Registrant varchar(30),
 		Price float,
 		constraint [PK_MedicineID] primary key clustered (ID)
 	)

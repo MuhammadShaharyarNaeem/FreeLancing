@@ -45,9 +45,9 @@
                 case "DeleteUser":
                     return
                         "delete from users where id= @arg0";
-                case "GetCompany":
+                case "GetUserPharmaCompany":
                     return "select ID,Name from PharmaCompany";
-                case "GetPharmacy":
+                case "GetUserPharmacy":
                     return "select ID,Name from Pharmacy";
                 #endregion
                 #region PharmaCompany
@@ -66,6 +66,40 @@
                 case "DeletePharmaCompany":
                     return
                         "delete from pharmacompany where id = @arg0";
+                #endregion
+                #region Pharmacy
+                case "GetPharmacys":
+                    return
+                        "select ID,Name,Email,ContactNumber,Description,Address from Pharmacy with (nolock)";
+                case "GetPharmacy":
+                    return
+                        "select ID,Name,Email,ContactNumber,Description,Address from Pharmacy with (nolock) where ID=@arg0";
+                case "InsertPharmacy":
+                    return
+                        "insert into Pharmacy(Name,Email,ContactNumber,Description,Address,RegistrationNumber) values (@arg0,@arg1,@arg2,@arg3,@arg4,@arg5)";
+                case "UpdatePharmacy":
+                    return
+                        "update Pharmacy set Name = @arg0, Email=@arg1, ContactNumber=@arg2, Description=@arg3, Address=@arg4 where id = @arg5";
+                case "DeletePharmacy":
+                    return
+                        "delete from Pharmacy where id = @arg0";
+                #endregion
+                #region Medicine
+                case "GetMedicines":
+                    return
+                        "select ID,Name,ExpiryDate,MfgDate,BatchNo,Price from Medicine with (nolock)";
+                case "GetMedicine":
+                    return
+                        "select ID,Name,QRCode,ExpiryDate,MfgDate,Quantity,BatchNo,RegistrationNbr,Price from Medicine with (nolock) where ID=@arg0";
+                case "InsertMedicine":
+                    return
+                        "insert into Medicine(Name,QRCode,ExpiryDate,MfgDate,Quantity,BatchNo,RegistrationNbr,Price) values (@arg0,@arg1,@arg2,@arg3,@arg4,@arg5,@arg6)";
+                case "UpdateMedicine":
+                    return
+                        "update Medicine set Name=@arg0, QRCode=@arg1, ExpiryDate=@arg2, MfgDate=@arg3, Quantity=@arg4, BatchNo=@arg4, RegistrationNbr=@arg5, Price =@arg6 where id = @arg5";
+                case "DeleteMedicine":
+                    return
+                        "delete from Medicine where id = @arg0";
                 #endregion
                 default:
                     return "";

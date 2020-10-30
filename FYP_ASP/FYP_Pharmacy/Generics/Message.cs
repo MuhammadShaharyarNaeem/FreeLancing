@@ -11,6 +11,6 @@
         public Enums.LogType LogType { get; set; }
         public string Query { get; set; }
         public Enums.QueryType QueryType { get; set; }
-        
+
     }
 }

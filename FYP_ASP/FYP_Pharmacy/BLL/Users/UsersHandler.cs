@@ -10,7 +10,7 @@ namespace BLL.Users
     public class UsersHandler : ActionHandler<UserModel>
     {
         public DataTable dt;
-        
+
         public override void DoFillGridAction()
         {
             SQLHandler sql = new SQLHandler();
@@ -122,9 +122,9 @@ namespace BLL.Users
             SQLHandler sql = new SQLHandler();
 
             if ((int)Enums.AccessLevel.CompanyAdmin == accessLevel)
-                dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetCompany"));
+                dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetUserPharmaCompany"));
             else if ((int)Enums.AccessLevel.Operator == accessLevel)
-                dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetPharmacy"));
+                dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetUserPharmacy"));
 
             MessageCollection.copyFrom(sql.Messages);
 

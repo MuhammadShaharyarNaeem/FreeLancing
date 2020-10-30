@@ -29,16 +29,16 @@
             CompanyAdmin = 1002,
             Operator = 1003
         }
-        
+
         public enum ButtonControl
         {
             Save,
             Update,
             Delete
         }
-        
+
         public enum GridCommand
-        { 
+        {
             EditRow,
             DeleteRow
         }

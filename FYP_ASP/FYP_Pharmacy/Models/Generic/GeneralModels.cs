@@ -9,7 +9,7 @@ namespace Models.Generic
         public string Password { get; set; }
         public string Contact { get; set; }
         public string Description { get; set; }
-        public string Address { get; set; }        
+        public string Address { get; set; }
 
     }
 
@@ -19,7 +19,7 @@ namespace Models.Generic
         public string Email { get; set; }
         public string Password { get; set; }
         public string Contact { get; set; }
-        public string Description { get; set; }    
+        public string Description { get; set; }
 
     }
 
@@ -40,22 +40,22 @@ namespace Models.Generic
     public class Pharmacy
     {
         public string Registration_ID { get; set; }
-        public string Name { get; set; }       
-        public string Description { get; set; }        
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
-    
+
     public class Purchase_Details
     {
         public string Medicine_ID { get; set; }
         public string Medicine_Name { get; set; }
         public string price { get; set; }
         public DateTime Payment_Date { get; set; }
-        public double Payment_Amount { get; set; }       
+        public double Payment_Amount { get; set; }
     }
     public class Customer
     {
         public string Name { get; set; }
-        public string Description { get; set; }       
+        public string Description { get; set; }
     }
 
 }

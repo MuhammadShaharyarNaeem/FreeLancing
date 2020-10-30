@@ -1,83 +1,86 @@
 ﻿using Generics;
 using Generics.Cache;
-using Models.PharmaCompany;
+using Models.Medicine;
 using System;
 using System.Collections;
 using System.Data;
 
-namespace BLL.PharmaCompany
+namespace BLL.Medicine
 {
-    public class PharmaCompanyHandler : ActionHandler<PharmaCompanyModel>
+    public class MedicineHandler : ActionHandler<MedicineModel>
     {
         public DataTable dt = new DataTable();
-
         public override void DoFillGridAction()
         {
             SQLHandler sql = new SQLHandler();
-            dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetPharmaCompanys"));
+            dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetMedicines"));
             MessageCollection.copyFrom(sql.Messages);
 
             if (dt == null || dt.Rows.Count <= 0)
             {
                 MessageCollection.addMessage(new Message()
                 {
-                    Context = "PharmaCompanyHandler",
+                    Context = "MedicineHandler",
                     ErrorCode = ErrorCache.RecordsNotFound,
                     ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.RecordsNotFound),
                     isError = true,
                     LogType = Enums.LogType.Exception,
-                    WebPage = "PharmaCompany"
+                    WebPage = "Medicine"
                 });
             }
         }
         public override void DoFillBackPanelAction(int ID)
         {
             SQLHandler sql = new SQLHandler(new ArrayList() { ID });
-            dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetPharmaCompany"));
+            dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetMedicine"));
             MessageCollection.copyFrom(sql.Messages);
 
             if (dt == null || dt.Rows.Count <= 0)
             {
                 MessageCollection.addMessage(new Message()
                 {
-                    Context = "PharmaCompanyHandler",
+                    Context = "MedicineHandler",
                     ErrorCode = ErrorCache.RecordsNotFound,
                     ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.RecordsNotFound),
                     isError = true,
                     LogType = Enums.LogType.Exception,
-                    WebPage = "PharmaCompany"
+                    WebPage = "Medicine"
                 });
             }
         }
-        public override void Insert(PharmaCompanyModel model)
+        public override void Insert(MedicineModel model)
         {
             var Params = new ArrayList()
             {
                 model.Name,
-                model.Email,
-                model.ContactNumber,
-                model.Description,
-                model.Address
+                model.QRCode,
+                model.ExpiryDate,
+                model.MfgDate,
+                model.BatchNo,
+                model.RegistrationNbr,
+                model.Price
             };
 
             SQLHandler sql = new SQLHandler(Params);
-            sql.ExecuteNonQuery(SqlCache.GetSql("InsertPharmaCompany"));
+            sql.ExecuteNonQuery(SqlCache.GetSql("InsertMedicine"));
             MessageCollection.copyFrom(sql.Messages);
         }
-        public override void Update(PharmaCompanyModel model)
+        public override void Update(MedicineModel model)
         {
             var Params = new ArrayList()
             {
                 model.Name,
-                model.Email,
-                model.ContactNumber,
-                model.Description,
-                model.Address,
+                model.QRCode,
+                model.ExpiryDate,
+                model.MfgDate,
+                model.BatchNo,
+                model.RegistrationNbr,
+                model.Price,
                 model.ID
             };
 
             SQLHandler sql = new SQLHandler(Params);
-            sql.ExecuteNonQuery(SqlCache.GetSql("UpdatePharmaCompany"));
+            sql.ExecuteNonQuery(SqlCache.GetSql("UpdateMedicine"));
             MessageCollection.copyFrom(sql.Messages);
         }
         public override void Delete(int ID)
@@ -85,7 +88,7 @@ namespace BLL.PharmaCompany
             var Params = new ArrayList() { ID };
 
             SQLHandler sql = new SQLHandler(Params);
-            sql.ExecuteNonQuery(SqlCache.GetSql("DeletePharmaCompany"));
+            sql.ExecuteNonQuery(SqlCache.GetSql("DeleteMedicine"));
             MessageCollection.copyFrom(sql.Messages);
         }
 
