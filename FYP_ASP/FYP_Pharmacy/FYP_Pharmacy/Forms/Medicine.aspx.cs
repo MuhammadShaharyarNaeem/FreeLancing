@@ -94,7 +94,7 @@ namespace FYP_Pharmacy.Forms
             else
             {
                 lbl_err.Text = "Record Inserted Successfully";
-                lbl_err.ForeColor = System.Drawing.Color.Green;
+                lbl_err.Style.Add("color","#FF008000");
             }
 
         }

@@ -104,13 +104,13 @@
                         <asp:Label runat="server" Text ="Expiry Date" CssClass="form-label" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txt_exp" CssClass="form-control" TextMode="DateTime"/>
+                        <asp:TextBox runat="server" ID="txt_exp" CssClass="form-control" TextMode="Date"  placeholder="12-12-2016" />
                     </td>
                     <td style="text-align:center">
                         <asp:Label runat="server" Text ="Mfg Date" CssClass="form-label" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txt_mfg" CssClass="form-control" TextMode="DateTime"/>
+                        <asp:TextBox runat="server" ID="txt_mfg" TextMode="Date"  placeholder="12-12-2016" CssClass="form-control" />
                     </td>
                     <td></td>
                     <td></td>
