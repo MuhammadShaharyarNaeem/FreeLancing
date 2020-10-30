@@ -27,18 +27,6 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
-            if (!IsPostBack)
-            {
-                if (Session == null || Session[Generics.Enums.SessionName.UserDetails.ToString()] == null)
-                {
-                    DataTable dt = (DataTable)Session[Generics.Enums.SessionName.UserDetails.ToString()];
-                    if (string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) || dt.Rows[0]["accesslevel"].ToString() != "1001")
-                    {
-                        Response.Redirect("login.aspx");
-                    }
-                }
-            }
-
             FillGrid();
         }
         #region Click Actions

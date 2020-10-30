@@ -9,7 +9,7 @@
                 case "UserLogin":
                     return
                         " select users.ID as [ID],LoginName as [LoginName],Password as [Password], " +
-                        " PharmaCompany.Name [Company], Pharmacy.Name as [Pharmacy], accessLevel as [AccessLevel] " +
+                        " PharmaCompany.Name [Company], PharmaCompany.ID as [CompanyID], Pharmacy.Name as [Pharmacy], Pharmacy.ID as [PharmacyID], accessLevel as [AccessLevel] " +
                         " from users with (nolock) " +
                         " left join PharmaCompany with (nolock) on PharmaCompany.ID = users.PharmaCompanyID " +
                         " left join Operator with (nolock) on Operator.ID = users.OperatorID " +
@@ -100,6 +100,27 @@
                 case "DeleteMedicine":
                     return
                         "delete from Medicine where id = @arg0";
+                #endregion
+                #region PharmacyInventory
+                case "GetPharmacyInventory":
+                    return
+                        " select PharmacyInventory.ID,Medicine.Name,Medicine.BatchNo,Medicine.Price,PharmacyInventory.Quantity,Medicine.RegistrationNbr " +
+                        " from PharmacyInventory with (nolock)" +
+                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID";
+                case "GetPharmacyInventoryByID":
+                    return
+                        " select ID as [ID], Medicine.ID as [MedicineID], Medicine.Name as [MedicineName], Quantity " +
+                        " from PharmacyInventory with (nolock) " +
+                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID ";
+                case "InsertPharmacyInventory":
+                    return
+                        " insert into PharmacyInventory (MedicineID,Quantity) values (@arg0,@arg1)";
+                case "UpdatePharmacyInventory":
+                    return
+                        " update PharmacyInventory set MedicineID = @arg0 and Quantity = @arg1 where id = @arg2";
+                case "DeletePharmacyInventory":
+                    return
+                        " delete from PharmacyInventory where id = @arg0";
                 #endregion
                 default:
                     return "";

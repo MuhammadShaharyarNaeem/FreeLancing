@@ -5,6 +5,7 @@ namespace Models.Medicine
     public class MedicineModel
     {
         public int ID { get; set; }
+        public int PharmaCompanyID { get; set; }
         public string Name { get; set; }
         public string QRCode { get; set; }
         public DateTime ExpiryDate { get;set;}
