@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Generics.Cache;
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Generics.Cache;
 
 namespace Generics
 {
@@ -67,7 +67,7 @@ namespace Generics
                                 sqlCommand.Parameters.AddWithValue("arg" + i, Params[i]);
                             }
                         }
-                        
+
 
                         SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                         da.Fill(ds);

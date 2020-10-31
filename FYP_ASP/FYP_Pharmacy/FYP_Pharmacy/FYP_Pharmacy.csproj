@@ -826,7 +826,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Forms\Login.aspx" />
-    <Content Include="Forms\PharmaInventory.aspx" />
+    <Content Include="Forms\Medicine.aspx" />
+    <Content Include="Forms\PharmaCompany.aspx" />
+    <Content Include="Forms\Pharmacy.aspx" />
     <Content Include="Forms\Users.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -919,12 +921,26 @@
     <Compile Include="Forms\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PharmaInventory.aspx.cs">
-      <DependentUpon>PharmaInventory.aspx</DependentUpon>
+    <Compile Include="Forms\Medicine.aspx.cs">
+      <DependentUpon>Medicine.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\PharmaInventory.aspx.designer.cs">
-      <DependentUpon>PharmaInventory.aspx</DependentUpon>
+    <Compile Include="Forms\Medicine.aspx.designer.cs">
+      <DependentUpon>Medicine.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PharmaCompany.aspx.cs">
+      <DependentUpon>PharmaCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PharmaCompany.aspx.designer.cs">
+      <DependentUpon>PharmaCompany.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pharmacy.aspx.cs">
+      <DependentUpon>Pharmacy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\Pharmacy.aspx.designer.cs">
+      <DependentUpon>Pharmacy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>

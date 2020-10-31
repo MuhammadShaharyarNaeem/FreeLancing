@@ -3,7 +3,7 @@ go
 
 if not exists (select * from sysobjects where name='PharmaCompany')
 	create table PharmaCompany(
-		ID int not null,
+		ID int not null identity,
 		Name varchar(30),
 		Email varchar(30),
 		ContactNumber varchar(30),

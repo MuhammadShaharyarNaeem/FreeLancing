@@ -19,7 +19,7 @@ namespace FYP_Pharmacy.Forms
                 ErrorCode = 0,
                 isError = false,
                 WebPage = PageName,
-                LogType = Generics.Enum.LogType.Functional,
+                LogType = Generics.Enums.LogType.Functional,
                 Function = method.Name
             });
             #endregion
@@ -34,7 +34,7 @@ namespace FYP_Pharmacy.Forms
                 ErrorCode = 0,
                 isError = false,
                 WebPage = PageName,
-                LogType = Generics.Enum.LogType.Functional,
+                LogType = Generics.Enums.LogType.Functional,
                 Function = method.Name
             });
             if (!string.IsNullOrWhiteSpace(txt_login.Text) || !string.IsNullOrWhiteSpace(txt_password.Text))
@@ -62,7 +62,7 @@ namespace FYP_Pharmacy.Forms
                 lbl_err.Text = "LoginName and Password cannot be empty";
                 lbl_err.Visible = true;
             }
-            
+
         }
     }
 }

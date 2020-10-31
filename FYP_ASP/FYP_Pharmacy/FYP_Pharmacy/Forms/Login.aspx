@@ -2,8 +2,8 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 <link href="content/bootstrap.min.css" rel="stylesheet" type="text/css" />  
-    <div style="margin-top: 50px">
-        <table style="width: 100%">
+    <div style="margin-top: 50px" class="container">
+        <table style="width: 100%; border-spacing:0 5px; border-collapse:separate " >
             <tr>
                 <td style="width: 12%"></td>
                 <td style="width: 12%"></td>

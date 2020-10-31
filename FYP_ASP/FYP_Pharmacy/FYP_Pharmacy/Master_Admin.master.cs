@@ -6,13 +6,13 @@ public partial class Master_Admin : System.Web.UI.MasterPage
     {
         if (IsPostBack != true)
         {
-           
+
         }
     }
 
     protected void lbtnLogout_Click(object sender, EventArgs e)
     {
-        
+
     }
     private void PushNotifications()
     {
