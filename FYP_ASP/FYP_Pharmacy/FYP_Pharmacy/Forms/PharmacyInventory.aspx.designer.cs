@@ -11,7 +11,7 @@ namespace FYP_Pharmacy.Forms
 {
 
 
-    public partial class PharmaCompany
+    public partial class PharmacyInventory
     {
 
         /// <summary>
@@ -78,49 +78,22 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.TextBox txt_id;
 
         /// <summary>
-        /// txt_name control.
+        /// ddl_Medicine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_name;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_Medicine;
 
         /// <summary>
-        /// txt_cnumber control.
+        /// txt_qty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_cnumber;
-
-        /// <summary>
-        /// txt_email control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_email;
-
-        /// <summary>
-        /// txt_desc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_desc;
-
-        /// <summary>
-        /// txt_addr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_addr;
+        protected global::System.Web.UI.WebControls.TextBox txt_qty;
 
         /// <summary>
         /// btn_SaveUpdDel control.

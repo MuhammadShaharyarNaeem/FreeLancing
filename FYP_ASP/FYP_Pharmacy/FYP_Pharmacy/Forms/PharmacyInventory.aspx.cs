@@ -1,6 +1,6 @@
-﻿using BLL.PharmaCompany;
+﻿using BLL.Pharmacy;
 using Generics;
-using Models.PharmaCompany;
+using Models.Pharmacy;
 using System;
 using System.Data;
 using System.Reflection;
@@ -8,13 +8,13 @@ using System.Web.UI.WebControls;
 
 namespace FYP_Pharmacy.Forms
 {
-    public partial class PharmaCompany : PageActionHandler
+    public partial class PharmacyInventory : PageActionHandler
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             #region logging
-            PageName = "PharmaCompany";
-            CONTEXT = "PharmaCompany";
+            PageName = "PharmacyInventory";
+            CONTEXT = "PharmacyInventory";
             method = MethodBase.GetCurrentMethod();
             MessageCollection.addMessage(new Message()
             {
@@ -27,8 +27,10 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
+            lbl_title.Text = ((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["Company"].ToString();
             FillGrid();
         }
+
         #region Click Actions
         protected void AddNew_Click(object sender, EventArgs e)
         {
@@ -69,9 +71,9 @@ namespace FYP_Pharmacy.Forms
         public void DoSaveAction()
         {
             var Model = MapToObject();
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.Insert(Model);
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyInventoryHandler PharmacyInventoryHandler = new PharmacyInventoryHandler();
+            PharmacyInventoryHandler.Insert(Model);
+            MessageCollection.copyFrom(PharmacyInventoryHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -82,16 +84,16 @@ namespace FYP_Pharmacy.Forms
             else
             {
                 lbl_err.Text = "Record Inserted Successfully";
-                lbl_err.ForeColor = System.Drawing.Color.Green;
+                lbl_err.Style.Add("color", "#FF008000");
             }
 
         }
         public void DoUpdateAction()
         {
             var Model = MapToObject();
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.Update(Model);
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyInventoryHandler PharmacyInventoryHandler = new PharmacyInventoryHandler();
+            PharmacyInventoryHandler.Update(Model);
+            MessageCollection.copyFrom(PharmacyInventoryHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -107,9 +109,9 @@ namespace FYP_Pharmacy.Forms
         }
         public void DoDeleteAction()
         {
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.Delete(Convert.ToInt32(txt_id.Text));
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyInventoryHandler PharmacyInventoryHandler = new PharmacyInventoryHandler();
+            PharmacyInventoryHandler.Delete(Convert.ToInt32(txt_id.Text));
+            MessageCollection.copyFrom(PharmacyInventoryHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -128,35 +130,30 @@ namespace FYP_Pharmacy.Forms
         #region HelperMethods
         public void EmptyFields()
         {
-            txt_addr.Text = string.Empty;
-            txt_cnumber.Text = string.Empty;
-            txt_desc.Text = string.Empty;
-            txt_email.Text = string.Empty;
-            txt_name.Text = string.Empty;
             txt_id.Text = string.Empty;
+            txt_qty.Text = string.Empty;
+            ddl_Medicine.DataSource = null;
+            ddl_Medicine.DataBind();
+            
         }
         public void DisableControls()
         {
-            txt_addr.Enabled = false;
-            txt_cnumber.Enabled = false;
-            txt_desc.Enabled = false;
-            txt_email.Enabled = false;
-            txt_name.Enabled = false;
+            txt_id.Enabled = false;
+            txt_qty.Enabled = false;
+            ddl_Medicine.Enabled = false;
+            
         }
         public void EnableControls()
         {
-            txt_addr.Enabled = true;
-            txt_cnumber.Enabled = true;
-            txt_desc.Enabled = true;
-            txt_email.Enabled = true;
-            txt_name.Enabled = true;
+            txt_qty.Enabled = true;
+            ddl_Medicine.Enabled = true;
         }
         public void FillGrid()
         {
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.DoFillGridAction();
-            DataTable gridData = PharmaCompanyHandler.dt;
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyInventoryHandler PharmacyInventoryHandler = new PharmacyInventoryHandler();
+            PharmacyInventoryHandler.DoFillGridAction();
+            DataTable gridData = PharmacyInventoryHandler.dt;
+            MessageCollection.copyFrom(PharmacyInventoryHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -168,14 +165,13 @@ namespace FYP_Pharmacy.Forms
             gridView.DataSource = gridData;
             gridView.DataBind();
 
-
         }
         public void FillFields(int ID)
         {
-            PharmaCompanyHandler PharmaCompanyHandler = new PharmaCompanyHandler();
-            PharmaCompanyHandler.DoFillBackPanelAction(ID);
-            DataTable Data = PharmaCompanyHandler.dt;
-            MessageCollection.copyFrom(PharmaCompanyHandler.MessageCollection);
+            PharmacyInventoryHandler PharmacyInventoryHandler = new PharmacyInventoryHandler();
+            PharmacyInventoryHandler.DoFillBackPanelAction(ID);
+            DataTable Data = PharmacyInventoryHandler.dt;
+            MessageCollection.copyFrom(PharmacyInventoryHandler.MessageCollection);
 
             if (MessageCollection.isErrorOccured)
             {
@@ -185,27 +181,23 @@ namespace FYP_Pharmacy.Forms
             }
             else
             {
-                txt_addr.Text = Data.Rows[0]["Address"].ToString();
-                txt_cnumber.Text = Data.Rows[0]["ContactNumber"].ToString();
-                txt_desc.Text = Data.Rows[0]["Description"].ToString();
-                txt_email.Text = Data.Rows[0]["Email"].ToString();
-                txt_name.Text = Data.Rows[0]["Name"].ToString();
                 txt_id.Text = Data.Rows[0]["ID"].ToString();
+                ddl_Medicine.SelectedValue = Data.Rows[0]["MedicineID"].ToString();
+                txt_qty.Text = Data.Rows[0]["Quantity"].ToString();
             }
         }
-        public PharmaCompanyModel MapToObject()
+        public PharmacyInventoryModel MapToObject()
         {
-            return new PharmaCompanyModel()
+            return new PharmacyInventoryModel()
             {
-                Address = txt_addr.Text,
-                ContactNumber = txt_cnumber.Text,
-                Description = txt_desc.Text,
-                Email = txt_email.Text,
-                Name = txt_name.Text,
+                Quantity=Convert.ToInt32(txt_qty.Text),
+                MedicineID = Convert.ToInt32(ddl_Medicine.SelectedValue.ToString()),
+                PharmacyID = Convert.ToInt32(((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["PharmacyID"].ToString()),
                 ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text)
             };
         }
         #endregion
+
         protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);

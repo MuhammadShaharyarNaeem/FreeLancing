@@ -27,18 +27,6 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
-            if (!IsPostBack)
-            {
-                if (Session == null || Session[Generics.Enums.SessionName.UserDetails.ToString()] == null)
-                {
-                    DataTable dt = (DataTable)Session[Generics.Enums.SessionName.UserDetails.ToString()];
-                    if (string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) || dt.Rows[0]["accesslevel"].ToString() != "1001")
-                    {
-                        Response.Redirect("login.aspx");
-                    }
-                }
-            }
-
             FillGrid();
         }
         #region Click Actions
@@ -177,8 +165,8 @@ namespace FYP_Pharmacy.Forms
                 lbl_err.Visible = true;
             }
 
-            gridPharmacy.DataSource = gridData;
-            gridPharmacy.DataBind();
+            gridView.DataSource = gridData;
+            gridView.DataBind();
 
 
         }
@@ -218,11 +206,11 @@ namespace FYP_Pharmacy.Forms
             };
         }
         #endregion
-        protected void gridPharmacy_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gridPharmacy.Rows[rowIndex];
-            int ID = int.Parse(row.Cells[0].Text);
+            
+            int ID = int.Parse(gridView.DataKeys[rowIndex].Value.ToString());
             FillFields(ID);
 
             if (e.CommandName.Equals(Enums.GridCommand.EditRow.ToString()))

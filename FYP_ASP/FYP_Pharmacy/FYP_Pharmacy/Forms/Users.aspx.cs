@@ -27,18 +27,6 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
-            if (!IsPostBack)
-            {
-                if (Session == null || Session[Generics.Enums.SessionName.UserDetails.ToString()] == null)
-                {
-                    DataTable dt = (DataTable)Session[Generics.Enums.SessionName.UserDetails.ToString()];
-                    if (string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) || dt.Rows[0]["accesslevel"].ToString() != "1001")
-                    {
-                        Response.Redirect("login.aspx");
-                    }
-                }
-            }
-
             FillGrid();
         }
 
@@ -98,6 +86,7 @@ namespace FYP_Pharmacy.Forms
                     MessageCollection.PublishLog();
                     lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
                     lbl_err.Visible = true;
+                    
                 }
                 else
                 {
@@ -105,8 +94,22 @@ namespace FYP_Pharmacy.Forms
                     ddl_Company.DataTextField = "Name";
                     ddl_Company.DataValueField = "ID";
                     ddl_Company.DataBind();
+                    ddl_Company.Enabled = true;
+
+                    if(!string.IsNullOrEmpty(txt_pw.Text))
+                        txt_pw.Attributes.Add("value", txt_pw.Text);
+                }
+                if (ddlData == null || ddlData.Rows.Count == 0)
+                {
+                    if (ddl_Company.SelectedItem != null && !string.IsNullOrEmpty(ddl_Company.SelectedItem.Text.ToString()))
+                    {
+                        ddl_Company.SelectedItem.Text = "";
+                        ddl_Company.SelectedItem.Value = "";
+                        ddl_Company.Enabled = false;
+                    }
                 }
             }
+            
         }
 
         #region DML Methods
@@ -177,6 +180,14 @@ namespace FYP_Pharmacy.Forms
             txt_id.Text = string.Empty;
             txt_pw.Attributes["value"] = string.Empty;
             ddl_accesslevel.SelectedIndex = 0;
+            ddl_Company.DataSource = null;
+            ddl_Company.DataBind();
+            ddl_Company.Enabled = false;
+            if (ddl_Company.SelectedItem != null && !string.IsNullOrEmpty(ddl_Company.SelectedItem.Text.ToString()))
+            {
+                ddl_Company.SelectedItem.Text = "";
+                ddl_Company.SelectedItem.Value = "";
+            }
         }
         public void DisableControls()
         {
@@ -205,8 +216,8 @@ namespace FYP_Pharmacy.Forms
                 lbl_err.Visible = true;
             }
 
-            gridPharmacy.DataSource = gridData;
-            gridPharmacy.DataBind();
+            gridView.DataSource = gridData;
+            gridView.DataBind();
 
         }
         public void FillFields(int ID)
@@ -238,17 +249,17 @@ namespace FYP_Pharmacy.Forms
             {
                 AccessLevel = Convert.ToInt32(ddl_accesslevel.SelectedValue),
                 CompanyKey = ddl_Company.SelectedValue,
-                Name = txt_usr.Text.Trim(),
+                Name = txt_usr.Text.Trim().ToLower(),
                 Password = txt_pw.Text,
                 ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text)
             };
         }
         #endregion
-        protected void gridPharmacy_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gridPharmacy.Rows[rowIndex];
-            int ID = int.Parse(row.Cells[0].Text);
+            int ID = int.Parse(gridView.DataKeys[rowIndex].Value.ToString());
+
             FillFields(ID);
 
             if (e.CommandName.Equals(Enums.GridCommand.EditRow.ToString()))

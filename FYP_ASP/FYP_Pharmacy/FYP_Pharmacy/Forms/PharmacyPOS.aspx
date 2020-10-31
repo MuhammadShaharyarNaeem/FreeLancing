@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Medicine.aspx.cs" Inherits="FYP_Pharmacy.Forms.Medicine" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="PharmacyPOS.aspx.cs" Inherits="FYP_Pharmacy.Forms.PharmacyPOS" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="content/bootstrap.min.css" rel="stylesheet" type="text/css" />
