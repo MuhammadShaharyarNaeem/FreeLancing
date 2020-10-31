@@ -830,6 +830,7 @@
     <Content Include="Forms\PharmaCompany.aspx" />
     <Content Include="Forms\Pharmacy.aspx" />
     <Content Include="Forms\PharmacyInventory.aspx" />
+    <Content Include="Forms\PharmacyPOS.aspx" />
     <Content Include="Forms\Users.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -949,6 +950,13 @@
     </Compile>
     <Compile Include="Forms\PharmacyInventory.aspx.designer.cs">
       <DependentUpon>PharmacyInventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PharmacyPOS.aspx.cs">
+      <DependentUpon>PharmacyPOS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PharmacyPOS.aspx.designer.cs">
+      <DependentUpon>PharmacyPOS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>

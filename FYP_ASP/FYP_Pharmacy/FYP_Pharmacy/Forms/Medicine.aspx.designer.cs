@@ -51,13 +51,13 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.Button btn_AddNew;
 
         /// <summary>
-        /// gridPharmacy control.
+        /// gridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridPharmacy;
+        protected global::System.Web.UI.WebControls.GridView gridView;
 
         /// <summary>
         /// pnl_back control.
@@ -121,15 +121,6 @@ namespace FYP_Pharmacy.Forms
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_batch;
-
-        /// <summary>
-        /// txt_reg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_reg;
 
         /// <summary>
         /// txt_price control.

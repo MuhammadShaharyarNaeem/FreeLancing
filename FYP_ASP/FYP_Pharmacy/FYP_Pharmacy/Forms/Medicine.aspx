@@ -36,11 +36,11 @@
                 </tr>
                 <tr>
                     <td colspan="8">
-                        <asp:GridView ID="gridPharmacy" runat="server" AutoGenerateColumns="false"
-                            CssClass="table table-hover table-striped" CellSpacing="0" Visible="true" BorderColor="White" OnRowCommand="gridPharmacy_RowCommand"
-                            AllowPaging="false" ShowHeader="true">
+                        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="false" 
+                            CssClass="table table-hover table-striped" CellSpacing="0" Visible="true" BorderColor="White" OnRowCommand="gridView_RowCommand"
+                            AllowPaging="false" ShowHeader="true" DataKeyNames="ID">
                             <Columns>
-                                <asp:BoundField runat="server" DataField="ID" HeaderText="ID"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="ID" HeaderText="ID" Visible="false"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="Name" HeaderText="Name"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="ExpiryDate" HeaderText="ExpiryDate"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="MfgDate" HeaderText="MfgDate"></asp:BoundField>
@@ -123,12 +123,8 @@
                     <td>
                         <asp:TextBox runat="server" ID="txt_batch" CssClass="form-control" />
                     </td>
-                    <td style="text-align: center">
-                        <asp:Label runat="server" Text="RegistrationNbr" CssClass="form-label" />
-                    </td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txt_reg" CssClass="form-control" />
-                    </td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

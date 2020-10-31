@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="PharmacyInventory.aspx.cs" Inherits="FYP_Pharmacy.Forms.PharmacyInventory" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="PharmacyPOS.aspx.cs" Inherits="FYP_Pharmacy.Forms.PharmacyPOS" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="content/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -42,10 +41,10 @@
                             <Columns>
                                 <asp:BoundField runat="server" DataField="ID" HeaderText="ID" Visible="false"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="Name" HeaderText="Name"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="ExpiryDate" HeaderText="ExpiryDate"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="MfgDate" HeaderText="MfgDate"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="BatchNo" HeaderText="BatchNo"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="Price" HeaderText="Price"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="Quantity" HeaderText="Quantity"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="RegistrationNbr" HeaderText="RegistrationNbr"></asp:BoundField>
                                 <asp:ButtonField runat="server" ButtonType="Button" Text="Edit" ControlStyle-CssClass="btn btn-primary" CommandName="EditRow" ItemStyle-Width="10%" />
                                 <asp:ButtonField runat="server" ButtonType="Button" Text="delete" ControlStyle-CssClass="btn btn-primary" CommandName="DeleteRow" ItemStyle-Width="10%" />
                             </Columns>
@@ -84,18 +83,61 @@
                 </tr>
                 <tr>
                     <td style="text-align: center">
-                        <asp:Label runat="server" Text="Medicine" CssClass="form-label" />
-                    </td>
-                    
-                    <td colspan="2">
-                        <asp:DropDownList runat="server" ID="ddl_Medicine" CssClass="form-control" Enabled="false"/>
-                    </td>
-                    <td style="text-align: center">
-                        <asp:Label runat="server" Text="Quantity" CssClass="form-label" />
+                        <asp:Label runat="server" Text="Name " CssClass="form-label" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txt_qty" CssClass="form-control"/>
+                        <asp:TextBox runat="server" ID="txt_name" CssClass="form-control" />
                     </td>
+                    <td style="text-align: center">
+                        <asp:Label runat="server" Text="QR/BarCode" CssClass="form-label" />
+                    </td>
+                    <td colspan="2">
+                        <asp:TextBox runat="server" ID="txt_qrcode" CssClass="form-control" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:Label runat="server" Text="Expiry Date" CssClass="form-label" />
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_exp" CssClass="form-control" TextMode="Date" placeholder="12-12-2016" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label runat="server" Text="Mfg Date" CssClass="form-label" />
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_mfg" TextMode="Date" placeholder="12-12-2016" CssClass="form-control" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:Label runat="server" Text="Batch No#" CssClass="form-label" />
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_batch" CssClass="form-control" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:Label runat="server" Text="Price" CssClass="form-label" />
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_price" CssClass="form-control" />
+                    </td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

@@ -64,13 +64,13 @@ namespace BLL.Users
             }
             else if ((int)Enums.AccessLevel.CompanyAdmin == model.AccessLevel)
             {
-                Params.Add(model.AccessLevel);
+                Params.Add(model.CompanyKey);
                 Params.Add(DBNull.Value);
             }
             else if ((int)Enums.AccessLevel.CompanyAdmin == model.AccessLevel)
             {
                 Params.Add(DBNull.Value);
-                Params.Add(model.AccessLevel);
+                Params.Add(model.CompanyKey);
             }
 
 
@@ -93,13 +93,13 @@ namespace BLL.Users
             }
             else if ((int)Enums.AccessLevel.CompanyAdmin == model.AccessLevel)
             {
-                Params.Add(model.AccessLevel);
+                Params.Add(model.CompanyKey);
                 Params.Add(DBNull.Value);
             }
             else if ((int)Enums.AccessLevel.CompanyAdmin == model.AccessLevel)
             {
                 Params.Add(DBNull.Value);
-                Params.Add(model.AccessLevel);
+                Params.Add(model.CompanyKey);
             }
 
             Params.Add(model.ID);

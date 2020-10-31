@@ -11,7 +11,7 @@ namespace FYP_Pharmacy.Forms
 {
 
 
-    public partial class PharmaCompany
+    public partial class PharmacyPOS
     {
 
         /// <summary>
@@ -87,40 +87,49 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.TextBox txt_name;
 
         /// <summary>
-        /// txt_cnumber control.
+        /// txt_qrcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_cnumber;
+        protected global::System.Web.UI.WebControls.TextBox txt_qrcode;
 
         /// <summary>
-        /// txt_email control.
+        /// txt_exp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_email;
+        protected global::System.Web.UI.WebControls.TextBox txt_exp;
 
         /// <summary>
-        /// txt_desc control.
+        /// txt_mfg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_desc;
+        protected global::System.Web.UI.WebControls.TextBox txt_mfg;
 
         /// <summary>
-        /// txt_addr control.
+        /// txt_batch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_addr;
+        protected global::System.Web.UI.WebControls.TextBox txt_batch;
+
+        /// <summary>
+        /// txt_price control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_price;
 
         /// <summary>
         /// btn_SaveUpdDel control.

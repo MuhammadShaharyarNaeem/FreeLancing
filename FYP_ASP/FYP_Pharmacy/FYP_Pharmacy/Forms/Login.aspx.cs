@@ -39,7 +39,7 @@ namespace FYP_Pharmacy.Forms
             });
             if (!string.IsNullOrWhiteSpace(txt_login.Text) || !string.IsNullOrWhiteSpace(txt_password.Text))
             {
-                LoginHandler login = new LoginHandler(txt_login.Text, txt_password.Text, Session);
+                LoginHandler login = new LoginHandler(txt_login.Text.ToLower(), txt_password.Text, Session);
                 login.DoAction();
                 MessageCollection.copyFrom(login.MessageCollection);
                 string accessLevel = login.accessLevel;
@@ -54,7 +54,7 @@ namespace FYP_Pharmacy.Forms
                     if (Convert.ToInt32(accessLevel) == 1001)
                         Response.Redirect("Users.aspx");
                     else
-                        Response.Redirect("PharmaInventory");
+                        Response.Redirect("medicine.aspx");
                 }
             }
             else

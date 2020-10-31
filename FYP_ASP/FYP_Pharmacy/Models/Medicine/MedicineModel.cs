@@ -11,7 +11,6 @@ namespace Models.Medicine
         public DateTime ExpiryDate { get;set;}
         public DateTime MfgDate { get; set; }
         public string BatchNo { get; set; }
-        public string RegistrationNbr { get; set; }
         public double Price { get; set; }
     }
 }

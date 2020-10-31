@@ -57,8 +57,8 @@ namespace BLL.Medicine
                 model.ExpiryDate,
                 model.MfgDate,
                 model.BatchNo,
-                model.RegistrationNbr,
-                model.Price
+                model.Price,
+                model.PharmaCompanyID
             };
 
             SQLHandler sql = new SQLHandler(Params);
@@ -74,7 +74,6 @@ namespace BLL.Medicine
                 model.ExpiryDate,
                 model.MfgDate,
                 model.BatchNo,
-                model.RegistrationNbr,
                 model.Price,
                 model.ID
             };

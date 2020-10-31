@@ -10,6 +10,7 @@ namespace FYP_Pharmacy.Forms
 {
     public partial class Medicine : PageActionHandler
     {
+        private int PharmaCompanyID { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             #region logging
@@ -27,6 +28,11 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
+            if (Session != null && Session[Enums.SessionName.UserDetails.ToString()] != null)
+            {
+                lbl_title.Text = ((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["Company"].ToString();
+                PharmaCompanyID = Convert.ToInt32(((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["CompanyID"].ToString());
+            }
             FillGrid();
         }
 
@@ -83,7 +89,7 @@ namespace FYP_Pharmacy.Forms
             else
             {
                 lbl_err.Text = "Record Inserted Successfully";
-                lbl_err.Style.Add("color","#FF008000");
+                lbl_err.Style.Add("color", "#FF008000");
             }
 
         }
@@ -135,7 +141,6 @@ namespace FYP_Pharmacy.Forms
             txt_exp.Text = string.Empty;
             txt_mfg.Text = string.Empty;
             txt_batch.Text = string.Empty;
-            txt_reg.Text = string.Empty;
             txt_price.Text = string.Empty;
         }
         public void DisableControls()
@@ -146,7 +151,6 @@ namespace FYP_Pharmacy.Forms
             txt_exp.Enabled = false;
             txt_mfg.Enabled = false;
             txt_batch.Enabled = false;
-            txt_reg.Enabled = false;
             txt_price.Enabled = false;
         }
         public void EnableControls()
@@ -156,7 +160,6 @@ namespace FYP_Pharmacy.Forms
             txt_exp.Enabled = true;
             txt_mfg.Enabled = true;
             txt_batch.Enabled = true;
-            txt_reg.Enabled = true;
             txt_price.Enabled = true;
         }
         public void FillGrid()
@@ -173,8 +176,8 @@ namespace FYP_Pharmacy.Forms
                 lbl_err.Visible = true;
             }
 
-            gridPharmacy.DataSource = gridData;
-            gridPharmacy.DataBind();
+            gridView.DataSource = gridData;
+            gridView.DataBind();
 
 
         }
@@ -196,10 +199,9 @@ namespace FYP_Pharmacy.Forms
                 txt_id.Text = Data.Rows[0]["ID"].ToString();
                 txt_name.Text = Data.Rows[0]["Name"].ToString(); ;
                 txt_qrcode.Text = Data.Rows[0]["QRCode"].ToString();
-                txt_exp.Text = Data.Rows[0]["ExpiryDate"].ToString();
-                txt_mfg.Text = Data.Rows[0]["MfgDate"].ToString();
+                txt_exp.Text = Convert.ToDateTime(Data.Rows[0]["ExpiryDate"].ToString()).ToString("yyyy-MM-dd");
+                txt_mfg.Text = Convert.ToDateTime(Data.Rows[0]["MfgDate"].ToString()).ToString("yyyy-MM-dd");
                 txt_batch.Text = Data.Rows[0]["BatchNo"].ToString();
-                txt_reg.Text = Data.Rows[0]["RegistrationNbr"].ToString();
                 txt_price.Text = Data.Rows[0]["Price"].ToString();
             }
         }
@@ -213,17 +215,17 @@ namespace FYP_Pharmacy.Forms
                 ExpiryDate = Convert.ToDateTime(txt_exp.Text),
                 MfgDate = Convert.ToDateTime(txt_mfg.Text),
                 BatchNo = txt_batch.Text,
-                RegistrationNbr = txt_reg.Text,
                 Price = Convert.ToInt64(txt_price.Text),
-                ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text)
+                ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text),
+                PharmaCompanyID = PharmaCompanyID
             };
         }
         #endregion
-        protected void gridPharmacy_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gridPharmacy.Rows[rowIndex];
-            int ID = int.Parse(row.Cells[0].Text);
+            
+            int ID = int.Parse(gridView.DataKeys[rowIndex].Value.ToString());
             FillFields(ID);
 
             if (e.CommandName.Equals(Enums.GridCommand.EditRow.ToString()))
