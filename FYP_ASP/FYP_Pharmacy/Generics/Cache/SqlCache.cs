@@ -100,6 +100,9 @@
                 case "DeleteMedicine":
                     return
                         "delete from Medicine where id = @arg0";
+                case "GetMedicinesForQRCode":
+                    return
+                        "select ID,Name,QRCode,convert(varchar, ExpiryDate, 101) as [ExpiryDate],convert(varchar, MfgDate, 101) as [MfgDate],BatchNo,Price from Medicine with (nolock) where QRCode=@arg0";
                 #endregion
                 #region PharmacyInventory
                 case "GetPharmacyInventory":
@@ -118,6 +121,9 @@
                 case "UpdatePharmacyInventory":
                     return
                         " update PharmacyInventory set MedicineID = @arg0 and Quantity = @arg1 where id = @arg2";
+                case "DecrementPharmacyInventory":
+                    return
+                        " update PharmacyInventory set MedicineID = @arg1 and Quantity = (Quantity - 1) where pharmacyid = @arg0 and MedicineID=@arg1";
                 case "DeletePharmacyInventory":
                     return
                         " delete from PharmacyInventory where id = @arg0";

@@ -20,7 +20,8 @@
         {
             AccountSetup,
             UserDetails,
-            MedicineDetail
+            MedicineDetail,
+            POSdetail
         };
 
         public enum AccessLevel

@@ -42,13 +42,22 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.Panel pnl_front;
 
         /// <summary>
-        /// btn_AddNew control.
+        /// qrcodelbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_AddNew;
+        protected global::System.Web.UI.WebControls.Label qrcodelbl;
+
+        /// <summary>
+        /// qrcodebox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox qrcodebox;
 
         /// <summary>
         /// gridView control.
