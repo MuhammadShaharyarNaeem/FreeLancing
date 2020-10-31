@@ -34,7 +34,7 @@ namespace FYP_Pharmacy.Forms
                 ErrorCode = 0,
                 isError = false,
                 WebPage = PageName,
-                LogType = Generics.Enums.LogType.Functional,
+                LogType = Enums.LogType.Functional,
                 Function = method.Name
             });
             if (!string.IsNullOrWhiteSpace(txt_login.Text) || !string.IsNullOrWhiteSpace(txt_password.Text))
@@ -42,7 +42,7 @@ namespace FYP_Pharmacy.Forms
                 LoginHandler login = new LoginHandler(txt_login.Text.ToLower(), txt_password.Text, Session);
                 login.DoAction();
                 MessageCollection.copyFrom(login.MessageCollection);
-                string accessLevel = login.accessLevel;
+                int accessLevel = login.accessLevel;
                 if (MessageCollection.isErrorOccured)
                 {
                     MessageCollection.PublishLog();
@@ -51,10 +51,33 @@ namespace FYP_Pharmacy.Forms
                 }
                 else
                 {
-                    if (Convert.ToInt32(accessLevel) == 1001)
-                        Response.Redirect("Users.aspx");
-                    else
-                        Response.Redirect("medicine.aspx");
+                    switch (accessLevel)
+                    {
+                        case (int)Enums.AccessLevel.Admin:
+                            {
+                                Response.Redirect("Users.aspx");
+                                break;
+                            }
+                        case (int)Enums.AccessLevel.CompanyAdmin:
+                            {
+                                Response.Redirect("Medicine.aspx");
+                                break;
+                            }
+                        case (int)Enums.AccessLevel.PharmacyAdmin:
+                            {
+                                Response.Redirect("PharmacyInventory.aspx");
+                                break;
+                            }
+                        case (int)Enums.AccessLevel.Operator:
+                            {
+                                Response.Redirect("PharmacyPOS.aspx");
+                                break;
+                            }
+                    }
+                    
+
+
+                    
                 }
             }
             else

@@ -12,8 +12,7 @@
                         " PharmaCompany.Name [Company], PharmaCompany.ID as [CompanyID], Pharmacy.Name as [Pharmacy], Pharmacy.ID as [PharmacyID], accessLevel as [AccessLevel] " +
                         " from users with (nolock) " +
                         " left join PharmaCompany with (nolock) on PharmaCompany.ID = users.PharmaCompanyID " +
-                        " left join Operator with (nolock) on Operator.ID = users.OperatorID " +
-                        " left join pharmacy with (nolock) on Operator.PharmacyID = pharmacy.ID " +
+                        " left join pharmacy with (nolock) on Users.PharmacyID = pharmacy.ID " +
                         " where users.LoginName = @arg0 and users.Password = @arg1";
                 case "GetMedicineData":
                     return
@@ -25,23 +24,22 @@
                         " case when PharmacyID !=null then pharmacy.name else pharmacompany.name end as [Company] " +
                         " from users with(nolock) " +
                         " left join PharmaCompany with(nolock) on PharmaCompany.ID = PharmaCompanyID " +
-                        " left join Operator with(nolock) on Operator.ID = OperatorID " +
-                        " left join pharmacy with(nolock) on Pharmacy.ID = Operator.PharmacyID ";
+                        " left join pharmacy with(nolock) on Pharmacy.ID = PharmacyID ";
                 case "GetUser":
                     return
                         " select users.id as [ID], loginname as [Name],accesslevel as [AccessLevel], password as [Password]," +
-                        " case when PharmacyID !=null then PharmacyID else PharmaCompanyID end as [Company] " +
+                        " case when PharmacyID !=null then PharmacyID else PharmaCompanyID end as [Company]," +
+                        " users.name as [UserName], users.contactnumber as [contactnumber], users.email as [email] " +
                         " from users with(nolock) " +
                         " left join PharmaCompany with(nolock) on PharmaCompany.ID = PharmaCompanyID " +
-                        " left join Operator with(nolock) on Operator.ID = OperatorID " +
-                        " left join pharmacy with(nolock) on Pharmacy.ID = Operator.PharmacyID " +
+                        " left join pharmacy with(nolock) on Pharmacy.ID = PharmacyID " +
                         " where users.id = @arg0";
                 case "InsertUser":
                     return
-                        "insert into users(LoginName,Password,AccessLevel,PharmaCompanyID,OperatorID) values(@arg0 ,@arg1 ,@arg2 ,@arg3 ,@arg4) ";
+                        "insert into users(LoginName,Password,AccessLevel,PharmaCompanyID,PharmacyID,Name,Email,ContactNumber) values(@arg0 ,@arg1 ,@arg2 ,@arg3 ,@arg4, @arg5, @arg6, @arg7) ";
                 case "UpdateUser":
                     return
-                        "update users set LoginName=@arg0, Password=@arg1, AccessLevel=@arg2, PharmaCompanyID=@arg3, OperatorID= @arg4 where id = @arg5 ";
+                        "update users set LoginName=@arg0, Password=@arg1, AccessLevel=@arg2, PharmaCompanyID=@arg3, PharmacyID= @arg4,Name=@arg6,Email=@arg7,ContactNumber=@arg8 where id = @arg5 ";
                 case "DeleteUser":
                     return
                         "delete from users where id= @arg0";
@@ -53,7 +51,7 @@
                 #region PharmaCompany
                 case "GetPharmaCompanys":
                     return
-                        "select ID,Name,Email,ContactNumber,Description,Address from PharmaCompany with (nolock)";
+                        "select ID,Name,Email,ContactNumber,Description from PharmaCompany with (nolock)";
                 case "GetPharmaCompany":
                     return
                         "select ID,Name,Email,ContactNumber,Description,Address from PharmaCompany with (nolock) where ID=@arg0";

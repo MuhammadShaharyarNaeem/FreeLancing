@@ -28,11 +28,31 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
-            if (Session != null && Session[Enums.SessionName.UserDetails.ToString()] != null)
+            if (Session != null)
             {
-                lbl_title.Text = ((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["Company"].ToString();
-                PharmaCompanyID = Convert.ToInt32(((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["CompanyID"].ToString());
+                DataTable dt = (DataTable)Session[Generics.Enums.SessionName.UserDetails.ToString()];
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    if (string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) || Convert.ToInt32(dt.Rows[0]["accesslevel"].ToString()) != (int)Enums.AccessLevel.CompanyAdmin)
+                    {
+                        Response.Redirect("login.aspx");
+                    }
+                    else
+                    {
+                        lbl_title.Text = dt.Rows[0]["Company"].ToString();
+                        PharmaCompanyID = Convert.ToInt32(dt.Rows[0]["CompanyID"].ToString());
+                    }
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
             }
+            else
+            {
+                Response.Redirect("login.aspx");
+            }
+                
             FillGrid();
         }
 

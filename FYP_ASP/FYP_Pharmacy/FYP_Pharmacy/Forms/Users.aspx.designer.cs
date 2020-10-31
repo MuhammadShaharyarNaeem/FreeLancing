@@ -114,6 +114,33 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.DropDownList ddl_Company;
 
         /// <summary>
+        /// txt_nam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_nam;
+
+        /// <summary>
+        /// txt_cntct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_cntct;
+
+        /// <summary>
+        /// txt_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_email;
+
+        /// <summary>
         /// btn_SaveUpdDel control.
         /// </summary>
         /// <remarks>
