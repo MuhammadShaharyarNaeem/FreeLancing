@@ -28,7 +28,8 @@
         {
             Admin = 1001,
             CompanyAdmin = 1002,
-            Operator = 1003
+            PharmacyAdmin = 1003,
+            Operator = 1004
         }
 
         public enum ButtonControl

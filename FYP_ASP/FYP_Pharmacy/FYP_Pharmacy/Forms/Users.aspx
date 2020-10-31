@@ -81,7 +81,7 @@
                 </tr>
                 <tr>
                     <td style="text-align:center">
-                        <asp:Label runat="server" Text ="UserName " CssClass="form-label" />
+                        <asp:Label runat="server" Text ="LoginName " CssClass="form-label" />
                     </td>
                     <td>
                         <asp:TextBox runat="server" ID="txt_usr" CssClass="form-control"/>
@@ -93,6 +93,7 @@
                         <asp:DropDownList runat="server" ID="ddl_accesslevel" CssClass="form-control" OnSelectedIndexChanged="ddl_accesslevel_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="Admin" Value="1001" Selected="True"/>
                             <asp:ListItem Text="CompanyAdmin" Value="1002" />
+                            <asp:ListItem Text="PharmacyAdmin" Value="1003"/>
                             <asp:ListItem Text="Operator" Value="1003"/>
                         </asp:DropDownList>
                     </td>
@@ -114,6 +115,38 @@
                     <td colspan="2">
                         <asp:DropDownList runat="server" ID="ddl_Company" CssClass="form-control" Enabled="false"/>
                     </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:Label runat="server" Text ="UserName" CssClass="form-label" />
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_nam" CssClass="form-control"/>
+                    </td>
+                    <td style="text-align:center">
+                        <asp:Label runat="server" Text ="Contact Number" CssClass="form-label" />
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_cntct" CssClass="form-control"/>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:Label runat="server" Text="Email" CssClass="form-label" />
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txt_email" CssClass="form-control" />
+                    </td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

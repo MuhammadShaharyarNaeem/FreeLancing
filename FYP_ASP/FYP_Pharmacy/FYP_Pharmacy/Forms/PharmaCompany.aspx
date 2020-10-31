@@ -44,7 +44,6 @@
                                 <asp:BoundField runat="server" DataField="Email" HeaderText="Email"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="ContactNumber" HeaderText="ContactNumber"></asp:BoundField>
                                 <asp:BoundField runat="server" DataField="Description" HeaderText="Description"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="Address" HeaderText="Address"></asp:BoundField>
                                 <asp:ButtonField runat="server" ButtonType="Button" Text="Edit" ControlStyle-CssClass="btn btn-primary" CommandName="EditRow" ItemStyle-Width="10%"/>
                                 <asp:ButtonField runat="server" ButtonType="Button" Text="delete" ControlStyle-CssClass="btn btn-primary" CommandName="DeleteRow" ItemStyle-Width="10%"/>
                             </Columns>

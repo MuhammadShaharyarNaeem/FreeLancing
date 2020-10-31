@@ -53,7 +53,7 @@ namespace BLL.Users
         {
             var Params = new ArrayList()
             {
-                model.Name,
+                model.loginName,
                 model.Password,
                 model.AccessLevel
             };
@@ -67,11 +67,14 @@ namespace BLL.Users
                 Params.Add(model.CompanyKey);
                 Params.Add(DBNull.Value);
             }
-            else if ((int)Enums.AccessLevel.CompanyAdmin == model.AccessLevel)
+            else if ((int)Enums.AccessLevel.PharmacyAdmin == model.AccessLevel || (int)Enums.AccessLevel.Operator == model.AccessLevel)
             {
                 Params.Add(DBNull.Value);
                 Params.Add(model.CompanyKey);
             }
+            Params.Add(model.UserName);
+            Params.Add(model.Email);
+            Params.Add(model.ContactNumber);
 
 
             SQLHandler sql = new SQLHandler(Params);
@@ -82,7 +85,7 @@ namespace BLL.Users
         {
             var Params = new ArrayList()
             {
-                model.Name,
+                model.loginName,
                 model.Password,
                 model.AccessLevel
             };
@@ -96,13 +99,16 @@ namespace BLL.Users
                 Params.Add(model.CompanyKey);
                 Params.Add(DBNull.Value);
             }
-            else if ((int)Enums.AccessLevel.CompanyAdmin == model.AccessLevel)
+            else if ((int)Enums.AccessLevel.PharmacyAdmin == model.AccessLevel || (int)Enums.AccessLevel.Operator == model.AccessLevel)
             {
                 Params.Add(DBNull.Value);
                 Params.Add(model.CompanyKey);
             }
 
             Params.Add(model.ID);
+            Params.Add(model.UserName);
+            Params.Add(model.Email);
+            Params.Add(model.ContactNumber);
 
             SQLHandler sql = new SQLHandler(Params);
             sql.ExecuteNonQuery(SqlCache.GetSql("UpdateUser"));
@@ -123,7 +129,7 @@ namespace BLL.Users
 
             if ((int)Enums.AccessLevel.CompanyAdmin == accessLevel)
                 dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetUserPharmaCompany"));
-            else if ((int)Enums.AccessLevel.Operator == accessLevel)
+            else if ((int)Enums.AccessLevel.PharmacyAdmin == accessLevel || (int)Enums.AccessLevel.Operator == accessLevel)
                 dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetUserPharmacy"));
 
             MessageCollection.copyFrom(sql.Messages);

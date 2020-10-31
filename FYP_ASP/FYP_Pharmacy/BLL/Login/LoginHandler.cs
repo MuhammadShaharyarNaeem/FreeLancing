@@ -1,5 +1,6 @@
 ﻿using Generics;
 using Generics.Cache;
+using System;
 using System.Collections;
 using System.Data;
 using System.Web.SessionState;
@@ -12,7 +13,7 @@ namespace BLL.Login
         string userName, password;
         HttpSessionState Session;
         public DataTable dt = new DataTable();
-        public string accessLevel { get; set; }
+        public int accessLevel { get; set; }
         #endregion
 
         public LoginHandler(string UserName, string Password, HttpSessionState session)
@@ -39,7 +40,7 @@ namespace BLL.Login
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     Session[Enums.SessionName.UserDetails.ToString()] = dt;
-                    accessLevel = dt.Rows[0]["accesslevel"].ToString();
+                    accessLevel = Convert.ToInt16(dt.Rows[0]["accesslevel"].ToString());
                 }
                 else if (dt == null || dt.Rows.Count <= 0)
                 {

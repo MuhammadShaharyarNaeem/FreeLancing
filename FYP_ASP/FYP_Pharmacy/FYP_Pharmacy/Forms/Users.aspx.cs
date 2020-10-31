@@ -27,6 +27,26 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
+            if (Session != null)
+            {
+                DataTable dt = (DataTable)Session[Generics.Enums.SessionName.UserDetails.ToString()];
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    if (string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) || dt.Rows[0]["accesslevel"].ToString() != "1001")
+                    {
+                        Response.Redirect("login.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("login.aspx");
+            }
+
             FillGrid();
         }
 
@@ -86,7 +106,6 @@ namespace FYP_Pharmacy.Forms
                     MessageCollection.PublishLog();
                     lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
                     lbl_err.Visible = true;
-                    
                 }
                 else
                 {
@@ -179,6 +198,9 @@ namespace FYP_Pharmacy.Forms
             txt_pw.Text = string.Empty;
             txt_id.Text = string.Empty;
             txt_pw.Attributes["value"] = string.Empty;
+            txt_nam.Text = string.Empty;
+            txt_email.Text = string.Empty;
+            txt_cntct.Text = string.Empty;
             ddl_accesslevel.SelectedIndex = 0;
             ddl_Company.DataSource = null;
             ddl_Company.DataBind();
@@ -195,12 +217,18 @@ namespace FYP_Pharmacy.Forms
             txt_usr.Enabled = false;
             ddl_accesslevel.Enabled = false;
             ddl_Company.Enabled = false;
+            txt_nam.Enabled = false;
+            txt_email.Enabled = false;
+            txt_cntct.Enabled = false;
         }
         public void EnableControls()
         {
             txt_pw.Enabled = true;
             txt_usr.Enabled = true;
             ddl_accesslevel.Enabled = true;
+            txt_nam.Enabled = true;
+            txt_email.Enabled = true;
+            txt_cntct.Enabled = true;
         }
         public void FillGrid()
         {
@@ -241,6 +269,9 @@ namespace FYP_Pharmacy.Forms
                 ddl_accesslevel.SelectedValue = UserData.Rows[0]["AccessLevel"].ToString();
                 ddl_accesslevel_SelectedIndexChanged(this, null);
                 ddl_Company.SelectedValue = UserData.Rows[0]["Company"].ToString();
+                txt_nam.Text = UserData.Rows[0]["username"].ToString();
+                txt_cntct.Text = UserData.Rows[0]["contactnumber"].ToString();
+                txt_email.Text = UserData.Rows[0]["email"].ToString();
             }
         }
         public UserModel MapToObject()
@@ -249,9 +280,12 @@ namespace FYP_Pharmacy.Forms
             {
                 AccessLevel = Convert.ToInt32(ddl_accesslevel.SelectedValue),
                 CompanyKey = ddl_Company.SelectedValue,
-                Name = txt_usr.Text.Trim().ToLower(),
+                loginName = txt_usr.Text.Trim().ToLower(),
                 Password = txt_pw.Text,
-                ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text)
+                ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text),
+                ContactNumber = txt_cntct.Text,
+                UserName = txt_nam.Text,
+                Email = txt_email.Text
             };
         }
         #endregion
