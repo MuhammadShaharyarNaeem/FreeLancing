@@ -45,12 +45,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" id="homePage" href="~/">Home</a>
-                    <a class="navbar-brand" runat="server" id="medPage" visible="false" href="~/">Medicine</a>
-                    <a class="navbar-brand" runat="server" id="pharmacompanypage" visible="false" href="~/">Pharmaceutical Comapany</a>
-                    <a class="navbar-brand" runat="server" id="pharmacypage" visible="false" href="~/">Pharmacy</a>
-                    <a class="navbar-brand" runat="server" id="userspage" visible="false" href="~/">Users</a>
+                    </button>                    
+                    <a class="navbar-brand" runat="server" id="medPage" visible="false" href="Forms/Medicine.aspx">Medicine</a>
+                    <a class="navbar-brand" runat="server" id="pharmacompanypage" visible="false" href="Forms/pharmacompany.aspx">Pharmaceutical Company</a>
+                    <a class="navbar-brand" runat="server" id="pharmacypage" visible="false" href="Forms/pharmacy.aspx">Pharmacy</a>
+                    <a class="navbar-brand" runat="server" id="userspage" visible="false" href="Forms/users.aspx">Users</a>
+                    <a class="navbar-brand" runat="server" id="PosPage" visible="false" href="Forms/pharmacypos.aspx">POS</a>
+                    <a class="navbar-brand" runat="server" id="pharmaInventory" visible="false" href="Forms/pharmacyinventory.aspx">POS</a>
                 </div>
                 <div class="navbar-collapse collapse">
                 </div>

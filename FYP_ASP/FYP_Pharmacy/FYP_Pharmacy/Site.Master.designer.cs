@@ -15,15 +15,6 @@ namespace FYP_Pharmacy
     {
 
         /// <summary>
-        /// homePage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor homePage;
-
-        /// <summary>
         /// medPage control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,24 @@ namespace FYP_Pharmacy
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor userspage;
+
+        /// <summary>
+        /// PosPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor PosPage;
+
+        /// <summary>
+        /// pharmaInventory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor pharmaInventory;
 
         /// <summary>
         /// MainContent control.

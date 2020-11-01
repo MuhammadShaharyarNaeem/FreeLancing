@@ -10,6 +10,8 @@
     </h4>
     <asp:Panel runat="server" ID="pnl_front" Visible="true">
         <div class="container">
+            <asp:Label runat="server" ID="qrcodelbl" Visible="true" Style="color: #ff0000" CssClass="form-label" Font-Bold="true" Text="Medicine: " />
+            <asp:TextBox runat="server" ID="qrcodebox" OnTextChanged="qrcode_TextChanged" />
             <table style="width: 100%; border-spacing: 0 5px; border-collapse: separate">
                 <tr>
                     <td style="width: 12%"></td>
@@ -28,10 +30,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td>
-                        <asp:Button runat="server" ID="btn_AddNew" Text="Add New" CssClass="btn btn-primary" OnClick="AddNew_Click" />
-                    </td>
+                    <td></td>                    
                 </tr>
                 <tr>
                     <td colspan="8">
@@ -40,12 +39,9 @@
                             AllowPaging="false" ShowHeader="true" DataKeyNames="ID">
                             <Columns>
                                 <asp:BoundField runat="server" DataField="ID" HeaderText="ID" Visible="false"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="Name" HeaderText="Name"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="ExpiryDate" HeaderText="ExpiryDate"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="MfgDate" HeaderText="MfgDate"></asp:BoundField>
+                                <asp:BoundField runat="server" DataField="Name" HeaderText="Name"></asp:BoundField>                                
                                 <asp:BoundField runat="server" DataField="BatchNo" HeaderText="BatchNo"></asp:BoundField>
-                                <asp:BoundField runat="server" DataField="Price" HeaderText="Price"></asp:BoundField>
-                                <asp:ButtonField runat="server" ButtonType="Button" Text="Edit" ControlStyle-CssClass="btn btn-primary" CommandName="EditRow" ItemStyle-Width="10%" />
+                                <asp:BoundField runat="server" DataField="Price" HeaderText="Price"></asp:BoundField>                               
                                 <asp:ButtonField runat="server" ButtonType="Button" Text="delete" ControlStyle-CssClass="btn btn-primary" CommandName="DeleteRow" ItemStyle-Width="10%" />
                             </Columns>
                         </asp:GridView>
