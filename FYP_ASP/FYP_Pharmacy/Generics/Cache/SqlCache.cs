@@ -139,7 +139,7 @@
                         " insert into customer (name) values (@arg0) ";
                 case "UpdatePharmacyPOSInventory":
                     return
-                        " update purchasedetails set quantity = quantity - 1 where id = @arg0";
+                        " update PharmacyInventory set quantity = quantity - 1 where id = @arg0";
                 case "InsertPurchaseDetails":
                     return
                         " Insert into purchasedetails(Name,PurchaseDate,Amount) values (@arg0,getdate(),@arg1)";

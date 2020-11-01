@@ -58,9 +58,6 @@ namespace FYP_Pharmacy.Forms
             {
                 Response.Redirect("login.aspx");
             }
-
-            txt_qrcode.Text = "";
-            txt_qrcode.Focus();
         }
 
         protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -71,17 +68,17 @@ namespace FYP_Pharmacy.Forms
 
             if (e.CommandName.Equals(Enums.GridCommand.DeleteRow.ToString()))
             {
-                DataTable dt = (DataTable)Session[Enums.SessionName.POSdetail.ToString()];
-                dt.AsEnumerable().Where(r => r.Field<int>("ID") == ID).ToList().ForEach(row => row.Delete());
+                DataTable dt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
+                medQuantity = (Dictionary<string,int>)ViewState[Enums.SessionName.MedicineDetail.ToString()];
+                if (medQuantity.ContainsKey(dt.Rows[rowIndex]["qrcode"].ToString()))
+                {
+                    medQuantity[dt.Rows[0]["qrcode"].ToString()] = medQuantity[dt.Rows[0]["qrcode"].ToString()] + 1;
+                }
+                dt.Rows.RemoveAt(rowIndex);
                 dt.AcceptChanges();
                 gridView.DataSource = dt;
                 gridView.DataBind();
                 CalculateSum(dt);
-
-                if (medQuantity.ContainsKey(dt.Rows[0]["qrcode"].ToString()))
-                {
-                    medQuantity[dt.Rows[0]["qrcode"].ToString()] = medQuantity[dt.Rows[0]["qrcode"].ToString()] + 1;
-                }
             }
         }
 
@@ -111,6 +108,7 @@ namespace FYP_Pharmacy.Forms
                     {
                         DataRow ValueRow = dt.Rows[0];
                         string qrCode = ValueRow["QRCode"].ToString();
+                        medQuantity = (Dictionary<string,int>)ViewState[Enums.SessionName.MedicineDetail.ToString()];
                         if (medQuantity.ContainsKey(qrCode))
                         {
                             if (medQuantity[qrCode] == 0)
@@ -154,32 +152,56 @@ namespace FYP_Pharmacy.Forms
                             POSdt.Rows.Add(dr);
                             gridView.DataSource = POSdt;
                             gridView.DataBind();
+                            CalculateSum(POSdt);
                         }
                     }
                     else
                     {
                         ViewState[Enums.SessionName.POSdetail.ToString()] = dt;
-                        medQuantity.Add(dt.Rows[0]["qrcode"].ToString(), Convert.ToInt32(dt.Rows[0]["quantity"]));
+                        medQuantity.Add(dt.Rows[0]["qrcode"].ToString(), Convert.ToInt32(dt.Rows[0]["quantity"]) - 1);
                         ViewState[Enums.SessionName.MedicineDetail.ToString()] = medQuantity;
+                        gridView.DataSource = dt;
+                        gridView.DataBind();
+                        CalculateSum(dt);
                     }
                 }
             }
-           
+
+            txt_qrcode.Text = "";
+            txt_qrcode.Focus();
         }
 
         protected void btn_Save_Click(object sender, EventArgs e)
         {
             var Griddt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
-            
+
             PharmacyPOSHandler handler = new PharmacyPOSHandler();
             handler.InsertCustomer(MapModelForInsertion());
             MessageCollection.copyFrom(handler.MessageCollection);
 
-            foreach (DataRow dr in Griddt.Rows)
+
+            if (!MessageCollection.isErrorOccured)
             {
-                var model = MapModelForInsertion(dr);
-                handler.Update(model);
+                foreach (DataRow dr in Griddt.Rows)
+                {
+                    var model = MapModelForInsertion(dr);
+                    handler.Update(model);
+                }
             }
+            MessageCollection.copyFrom(handler.MessageCollection);
+            if (MessageCollection.isErrorOccured)
+            {
+                MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
+            }
+            else
+            {
+                lbl_err.Text = "Record Inserted Successfully";
+                lbl_err.Style.Add("color", "#FF008000");
+                btn_cancel_Click(null, null);
+            }
+
         }
 
         private PharmacyInventoryModel MapModelForInsertion()

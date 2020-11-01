@@ -16,7 +16,7 @@ namespace BLL.Pharmacy
             sql.ExecuteNonQuery(SqlCache.GetSql("InsertCustomer"));
             MessageCollection.copyFrom(sql.Messages);
 
-            sql = new SQLHandler(new ArrayList() { Model.ID, Model.CustomerName });
+            sql = new SQLHandler(new ArrayList() {  Model.CustomerName, Model.Amount });
             sql.ExecuteNonQuery(SqlCache.GetSql("InsertPurchaseDetails"));
             MessageCollection.copyFrom(sql.Messages);
 
@@ -69,7 +69,7 @@ namespace BLL.Pharmacy
 
         public override void Update(PharmacyInventoryModel Model)
         {
-            SQLHandler sql = new SQLHandler(new ArrayList() { Model.MedicineID, Model.Quantity, Model.ID });
+            SQLHandler sql = new SQLHandler(new ArrayList() { Model.ID });
             sql.ExecuteNonQuery(SqlCache.GetSql("UpdatePharmacyPOSInventory"));
             MessageCollection.copyFrom(sql.Messages);
         }

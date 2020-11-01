@@ -28,7 +28,7 @@
                         <asp:Label runat="server" Text="QR/BarCode" CssClass="form-label" />
                     </td>
                     <td colspan="2">
-                        <asp:TextBox runat="server" ID="txt_qrcode" Width="100%" CssClass="form-control" OnTextChanged="txt_qrcode_TextChanged"/>
+                        <asp:TextBox runat="server" ID="txt_qrcode" Width="100%" CssClass="form-control" OnTextChanged="txt_qrcode_TextChanged" AutoPostBack="true"/>
                     </td>
                     <td></td>
                     <td></td>
