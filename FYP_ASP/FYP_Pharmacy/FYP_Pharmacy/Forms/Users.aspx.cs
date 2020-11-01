@@ -66,23 +66,33 @@ namespace FYP_Pharmacy.Forms
         }
         protected void btn_SaveUpdDel_Click(object sender, EventArgs e)
         {
-            if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+            ValidateFields();
+            if (!this.MessageCollection.isErrorOccured)
             {
-                DoSaveAction();
+                if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+                {
+                    DoSaveAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+                {
+                    DoUpdateAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
+                {
+                    DoDeleteAction();
+                }
+                pnl_back.Visible = false;
+                pnl_front.Visible = true;
+                EmptyFields();
+                EnableControls();
+                FillGrid();
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+            else
             {
-                DoUpdateAction();
+                MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
-            {
-                DoDeleteAction();
-            }
-            pnl_back.Visible = false;
-            pnl_front.Visible = true;
-            EmptyFields();
-            EnableControls();
-            FillGrid();
         }
         #endregion
 
@@ -287,6 +297,26 @@ namespace FYP_Pharmacy.Forms
                 UserName = txt_nam.Text,
                 Email = txt_email.Text
             };
+        }
+
+        public void ValidateFields()
+        {
+            ValidationHandler validation = new ValidationHandler();
+            validation.CheckNull(ref txt_usr, "LoginName");
+            validation.CheckMaxLength(ref txt_usr, "LoginName ", 30);
+
+            validation.CheckNull(ref txt_pw, "Password ");
+            validation.CheckMaxLength(ref txt_pw, "Password ", 30);
+
+            validation.CheckNull(ref txt_nam, "UserName ");
+            validation.CheckMaxLength(ref txt_nam, "UserName ", 30);
+
+            validation.CheckMaxLength(ref txt_email, "Email ", 30);
+
+            validation.CheckNumber(ref txt_cntct, "Contact Number ");
+            validation.CheckMaxLength(ref txt_cntct, "Contact Number ", 30);
+
+            MessageCollection.copyFrom(validation.messageCollection);
         }
         #endregion
         protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
