@@ -28,7 +28,7 @@
                         <asp:Label runat="server" Text="QR/BarCode" CssClass="form-label" />
                     </td>
                     <td colspan="2">
-                        <asp:TextBox runat="server" ID="txt_qrode" Enabled="true" Width="100%" CssClass="form-control" OnTextChanged="txt_qrode_TextChanged" AutoPostBack="true" />
+                        <asp:TextBox runat="server" ID="txt_qrcode" Width="100%" CssClass="form-control" OnTextChanged="txt_qrcode_TextChanged"/>
                     </td>
                     <td></td>
                     <td></td>
@@ -85,7 +85,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <asp:Button runat="server" ID="btn_Save" CssClass="btn btn-primary" OnClick="btn_Save_Click" />
+                        <asp:Button runat="server" ID="btn_Save" CssClass="btn btn-primary" OnClick="btn_Save_Click" Text="Save"/>
                     </td>
                     <td>
                         <asp:Button runat="server" ID="btn_cancel" CssClass="btn btn-danger" Text="Cancel" OnClick="btn_cancel_Click" />

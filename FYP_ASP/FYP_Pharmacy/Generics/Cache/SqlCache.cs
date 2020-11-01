@@ -134,6 +134,15 @@
                         " from medicine with(nolock) " +
                         " left join PharmacyInventory on PharmacyInventory.MedicineID = medicine.id " +
                         " where PharmacyID = @arg0 and QRCode = @arg1 ";
+                case "InsertCustomer":
+                    return
+                        " insert into customer (name) values (@arg0) ";
+                case "UpdatePharmacyPOSInventory":
+                    return
+                        " update purchasedetails set quantity = quantity - 1 where id = @arg0";
+                case "InsertPurchaseDetails":
+                    return
+                        " Insert into purchasedetails(Name,PurchaseDate,Amount) values (@arg0,getdate(),@arg1)";
                 #endregion
                 default:
                     return "";

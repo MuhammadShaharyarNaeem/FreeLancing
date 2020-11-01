@@ -10,6 +10,17 @@ namespace BLL.Pharmacy
     {
         DataTable dt = new DataTable();
 
+        public void InsertCustomer(PharmacyInventoryModel Model)
+        {
+            SQLHandler sql = new SQLHandler(new ArrayList() { Model.CustomerName });
+            sql.ExecuteNonQuery(SqlCache.GetSql("InsertCustomer"));
+            MessageCollection.copyFrom(sql.Messages);
+
+            sql = new SQLHandler(new ArrayList() { Model.ID, Model.CustomerName });
+            sql.ExecuteNonQuery(SqlCache.GetSql("InsertPurchaseDetails"));
+            MessageCollection.copyFrom(sql.Messages);
+
+        }
         public override void Delete(int ID)
         {
             throw new System.NotImplementedException();
@@ -59,21 +70,8 @@ namespace BLL.Pharmacy
         public override void Update(PharmacyInventoryModel Model)
         {
             SQLHandler sql = new SQLHandler(new ArrayList() { Model.MedicineID, Model.Quantity, Model.ID });
-            dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("UpdatePharmacyPOSInventory"));
+            sql.ExecuteNonQuery(SqlCache.GetSql("UpdatePharmacyPOSInventory"));
             MessageCollection.copyFrom(sql.Messages);
-
-            if (dt == null || dt.Rows.Count <= 0)
-            {
-                MessageCollection.addMessage(new Message()
-                {
-                    Context = "PharmacyPOSHandler",
-                    ErrorCode = ErrorCache.RecordsNotFound,
-                    ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.RecordsNotFound),
-                    isError = true,
-                    LogType = Enums.LogType.Exception,
-                    WebPage = "PharmacyPOS"
-                });
-            }
         }
 
     }

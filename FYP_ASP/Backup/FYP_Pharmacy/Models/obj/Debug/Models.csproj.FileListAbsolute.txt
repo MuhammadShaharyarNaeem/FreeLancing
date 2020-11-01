@@ -1,6 +1,0 @@
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Models\bin\Debug\Models.dll
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Models\bin\Debug\Models.pdb
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Models\obj\Debug\Models.csprojAssemblyReference.cache
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Models\obj\Debug\Models.dll
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Models\obj\Debug\Models.pdb

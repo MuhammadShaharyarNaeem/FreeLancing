@@ -7,5 +7,6 @@
         public int PharmacyID { get; set; }
         public int Quantity { get; set; }
         public string CustomerName { get; set; }
+        public float Amount { get; set; }
     }
 }

@@ -1,6 +1,0 @@
-PharmaCompany
-Pharmacy
-Operator
-Users
-Customer
-Medicine

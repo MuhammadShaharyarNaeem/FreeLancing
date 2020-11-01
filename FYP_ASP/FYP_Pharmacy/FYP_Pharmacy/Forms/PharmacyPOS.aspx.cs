@@ -46,6 +46,7 @@ namespace FYP_Pharmacy.Forms
                     else
                     {
                         lbl_title.Text = dt.Rows[0]["Pharmacy"].ToString();
+                        PharmacyID = dt.Rows[0]["PharmacyID"].ToString();
                     }
                 }
                 else
@@ -58,9 +59,8 @@ namespace FYP_Pharmacy.Forms
                 Response.Redirect("login.aspx");
             }
 
-            txt_qrode.Text = "";
-            txt_qrode.Focus();
-
+            txt_qrcode.Text = "";
+            txt_qrcode.Focus();
         }
 
         protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -77,6 +77,11 @@ namespace FYP_Pharmacy.Forms
                 gridView.DataSource = dt;
                 gridView.DataBind();
                 CalculateSum(dt);
+
+                if (medQuantity.ContainsKey(dt.Rows[0]["qrcode"].ToString()))
+                {
+                    medQuantity[dt.Rows[0]["qrcode"].ToString()] = medQuantity[dt.Rows[0]["qrcode"].ToString()] + 1;
+                }
             }
         }
 
@@ -90,78 +95,108 @@ namespace FYP_Pharmacy.Forms
             txt_total.Text = sum.ToString();
         }
 
-        protected void txt_qrode_TextChanged(object sender, EventArgs e)
+        protected void txt_qrcode_TextChanged(object sender, EventArgs e)
         {
-            var model = MapModelForQRCode();
-            PharmacyPOSHandler handler = new PharmacyPOSHandler();
-            var dt = handler.GetMedicine(model);
-            MessageCollection.copyFrom(handler.MessageCollection);
-
-            if (!MessageCollection.isErrorOccured)
+            if (!string.IsNullOrWhiteSpace(txt_qrcode.Text))
             {
-                if (ViewState != null && ViewState[Enums.SessionName.POSdetail.ToString()] != null && 
-                    ViewState[Enums.SessionName.MedicineDetail.ToString()] != null)
-                {
-                    DataRow ValueRow = dt.Rows[0];
-                    string qrCode = ValueRow["QRCode"].ToString();
-                    if (medQuantity.ContainsKey(qrCode))
-                    {
-                        if (medQuantity[qrCode] == 0)
-                        {
-                            MessageCollection.addMessage(new Message()
-                            {
-                                Context = "PharmacyPOS",
-                                LogType = Enums.LogType.Exception,
-                                WebPage = "PharmacyPOS",
-                                isError = true,
-                                ErrorCode = ErrorCache.NoQuantityLeftError,
-                                ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.NoQuantityLeftError)
-                            });
+                var model = MapModelForQRCode();
+                PharmacyPOSHandler handler = new PharmacyPOSHandler();
+                var dt = handler.GetMedicine(model);
+                MessageCollection.copyFrom(handler.MessageCollection);
 
-                            MessageCollection.PublishLog();
-                            lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
-                            lbl_err.Visible = true;
+                if (!MessageCollection.isErrorOccured)
+                {
+                    if (ViewState != null && ViewState[Enums.SessionName.POSdetail.ToString()] != null &&
+                        ViewState[Enums.SessionName.MedicineDetail.ToString()] != null)
+                    {
+                        DataRow ValueRow = dt.Rows[0];
+                        string qrCode = ValueRow["QRCode"].ToString();
+                        if (medQuantity.ContainsKey(qrCode))
+                        {
+                            if (medQuantity[qrCode] == 0)
+                            {
+                                MessageCollection.addMessage(new Message()
+                                {
+                                    Context = "PharmacyPOS",
+                                    LogType = Enums.LogType.Exception,
+                                    WebPage = "PharmacyPOS",
+                                    isError = true,
+                                    ErrorCode = ErrorCache.NoQuantityLeftError,
+                                    ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.NoQuantityLeftError)
+                                });
+
+                                MessageCollection.PublishLog();
+                                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                                lbl_err.Visible = true;
+                            }
+                            else
+                            {
+                                medQuantity[qrCode] = medQuantity[qrCode] - 1;
+                            }
                         }
                         else
                         {
-                            medQuantity[qrCode] = medQuantity[qrCode] - 1;
+                            medQuantity.Add(qrCode, Convert.ToInt32(ValueRow["Quantity"]));
+                        }
+
+                        if (!MessageCollection.isErrorOccured)
+                        {
+                            DataTable POSdt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
+                            DataRow dr = POSdt.NewRow();
+
+                            dr["ID"] = ValueRow["ID"];
+                            dr["Name"] = ValueRow["Name"];
+                            dr["BatchNo"] = ValueRow["BatchNo"];
+                            dr["ExpiryDate"] = ValueRow["ExpiryDate"];
+                            dr["MfgDate"] = ValueRow["MfgDate"];
+                            dr["Price"] = ValueRow["Price"];
+                            dr["QRCode"] = ValueRow["QRCode"];
+                            POSdt.Rows.Add(dr);
+                            gridView.DataSource = POSdt;
+                            gridView.DataBind();
                         }
                     }
                     else
                     {
-                        medQuantity.Add(qrCode, Convert.ToInt32(ValueRow["Quantity"]));
+                        ViewState[Enums.SessionName.POSdetail.ToString()] = dt;
+                        medQuantity.Add(dt.Rows[0]["qrcode"].ToString(), Convert.ToInt32(dt.Rows[0]["quantity"]));
+                        ViewState[Enums.SessionName.MedicineDetail.ToString()] = medQuantity;
                     }
-
-                    if (!MessageCollection.isErrorOccured)
-                    {
-                        DataTable POSdt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
-                        DataRow dr = POSdt.NewRow();
-
-                        dr["ID"] = ValueRow["ID"];
-                        dr["Name"] = ValueRow["Name"];
-                        dr["BatchNo"] = ValueRow["BatchNo"];
-                        dr["ExpiryDate"] = ValueRow["ExpiryDate"];
-                        dr["MfgDate"] = ValueRow["MfgDate"];
-                        dr["Price"] = ValueRow["Price"];
-                        dr["QRCode"] = ValueRow["QRCode"];
-                        POSdt.Rows.Add(dr);
-                        gridView.DataSource = POSdt;
-                        gridView.DataBind();
-                    }
-                }
-                else
-                {
-                    ViewState[Enums.SessionName.POSdetail.ToString()] = dt;
-                    medQuantity.Add(dt.Rows[0]["qrcode"].ToString(), Convert.ToInt32(dt.Rows[0]["quantity"]));
-                    ViewState[Enums.SessionName.MedicineDetail.ToString()] = medQuantity;
                 }
             }
+           
         }
 
         protected void btn_Save_Click(object sender, EventArgs e)
         {
-            var dt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
+            var Griddt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
+            
+            PharmacyPOSHandler handler = new PharmacyPOSHandler();
+            handler.InsertCustomer(MapModelForInsertion());
+            MessageCollection.copyFrom(handler.MessageCollection);
 
+            foreach (DataRow dr in Griddt.Rows)
+            {
+                var model = MapModelForInsertion(dr);
+                handler.Update(model);
+            }
+        }
+
+        private PharmacyInventoryModel MapModelForInsertion()
+        {
+            return new PharmacyInventoryModel()
+            {
+                CustomerName = txt_cust.Text,
+                Amount = Convert.ToInt64(txt_total.Text)
+            };
+        }
+
+        private PharmacyInventoryModel MapModelForInsertion(DataRow dr)
+        {
+            return new PharmacyInventoryModel()
+            {
+                ID = Convert.ToInt32(dr["ID"])
+            };
         }
 
         protected void btn_cancel_Click(object sender, EventArgs e)
@@ -172,14 +207,14 @@ namespace FYP_Pharmacy.Forms
             gridView.DataBind();
             txt_cust.Text = "";
             txt_total.Text = "";
-            txt_qrode.Text = "";
+            txt_qrcode.Text = "";
         }
         public PharmacyInventoryModel MapModelForQRCode()
         {
             return new PharmacyInventoryModel()
             {
                 PharmacyID = Convert.ToInt32(PharmacyID),
-                MedicineID = Convert.ToInt32(txt_qrode.Text)
+                MedicineID = Convert.ToInt32(txt_qrcode.Text)
             };
         }
 

@@ -42,13 +42,13 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.Panel pnl_front;
 
         /// <summary>
-        /// txt_qrode control.
+        /// txt_qrcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_qrode;
+        protected global::System.Web.UI.WebControls.TextBox txt_qrcode;
 
         /// <summary>
         /// gridView control.
