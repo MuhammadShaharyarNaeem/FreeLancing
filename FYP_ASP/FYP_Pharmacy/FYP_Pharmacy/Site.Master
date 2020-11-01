@@ -51,7 +51,9 @@
                     <a class="navbar-brand" runat="server" id="pharmacypage" visible="false" href="Forms/pharmacy.aspx">Pharmacy</a>
                     <a class="navbar-brand" runat="server" id="userspage" visible="false" href="Forms/users.aspx">Users</a>
                     <a class="navbar-brand" runat="server" id="PosPage" visible="false" href="Forms/pharmacypos.aspx">POS</a>
-                    <a class="navbar-brand" runat="server" id="pharmaInventory" visible="false" href="Forms/pharmacyinventory.aspx">POS</a>
+                    <a class="navbar-brand" runat="server" id="pharmaInventory" visible="false" href="Forms/pharmacyinventory.aspx">Pharmacy Inventory</a>
+                    <a class="navbar-brand" runat="server" style="float: right" id="logoutbtn" visible="false" href="Forms/login.aspx">Logout</a>
+
                 </div>
                 <div class="navbar-collapse collapse">
                 </div>
