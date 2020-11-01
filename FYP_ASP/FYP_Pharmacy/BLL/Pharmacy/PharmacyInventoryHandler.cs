@@ -28,7 +28,7 @@ namespace BLL.Pharmacy
                     ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.RecordsNotFound),
                     isError = true,
                     LogType = Enums.LogType.Exception,
-                    WebPage = "Pharmacy"
+                    WebPage = "PharmacyInventory"
                 });
             }
         }
@@ -47,7 +47,7 @@ namespace BLL.Pharmacy
                     ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.RecordsNotFound),
                     isError = true,
                     LogType = Enums.LogType.Exception,
-                    WebPage = "Pharmacy"
+                    WebPage = "PharmacyInventory"
                 });
             }
         }
@@ -108,7 +108,7 @@ namespace BLL.Pharmacy
                     ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.RecordsNotFound),
                     isError = true,
                     LogType = Enums.LogType.Exception,
-                    WebPage = "Pharmacy"
+                    WebPage = "PharmacyInventory"
                 });
             }
         }

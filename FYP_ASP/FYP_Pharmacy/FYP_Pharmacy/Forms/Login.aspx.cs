@@ -23,6 +23,8 @@ namespace FYP_Pharmacy.Forms
                 Function = method.Name
             });
             #endregion
+
+            Session.Clear();
         }
 
         protected void OnSubmit_Click(object sender, EventArgs e)
@@ -37,6 +39,8 @@ namespace FYP_Pharmacy.Forms
                 LogType = Enums.LogType.Functional,
                 Function = method.Name
             });
+
+            
             if (!string.IsNullOrWhiteSpace(txt_login.Text) || !string.IsNullOrWhiteSpace(txt_password.Text))
             {
                 LoginHandler login = new LoginHandler(txt_login.Text.ToLower(), txt_password.Text, Session);
@@ -74,10 +78,6 @@ namespace FYP_Pharmacy.Forms
                                 break;
                             }
                     }
-                    
-
-
-                    
                 }
             }
             else

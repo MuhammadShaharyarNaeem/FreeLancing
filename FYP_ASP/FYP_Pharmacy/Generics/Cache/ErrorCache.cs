@@ -18,6 +18,9 @@
 
         public const int MaxCharacterError = 1000003;
         private static readonly string MaxCharacterErrorString = "Field character Limit Reached";
+        
+        public const int NoQuantityLeftError = 1000004;
+        private static readonly string NoQuantityLeftErrorString = "No Quantity Left for the Following Item Code";
 
         public const int GeneralSqlError = 2000000;
         private static readonly string GeneralSqlErrorString = "An Exception Occured while Executing Sql Statement";
@@ -44,6 +47,7 @@
                 case SqlConnectionError: return SqlConnectionErrorString;
                 case RecordsNotFound: return RecordsNotFoundString;
                 case LoginFailed: return LoginFailedString;
+                case NoQuantityLeftError: return NoQuantityLeftErrorString;
                 default:
                     return UnHandledErrorString;
             }

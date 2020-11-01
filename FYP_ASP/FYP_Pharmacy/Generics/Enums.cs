@@ -18,10 +18,9 @@
         }
         public enum SessionName
         {
-            AccountSetup,
             UserDetails,
-            MedicineDetail,
-            POSdetail
+            POSdetail,
+            MedicineDetail
         };
 
         public enum AccessLevel

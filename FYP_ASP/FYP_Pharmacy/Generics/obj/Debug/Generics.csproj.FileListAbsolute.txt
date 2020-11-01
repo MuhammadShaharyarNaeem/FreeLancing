@@ -1,9 +1,9 @@
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.csprojAssemblyReference.cache
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.csproj.CoreCompileInputs.cache
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\bin\Debug\Generics.dll
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\bin\Debug\Generics.pdb
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.dll
-E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.pdb
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\bin\Debug\Logger.dll
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\bin\Debug\Logger.pdb
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.csprojAssemblyReference.cache
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.csproj.CoreCompileInputs.cache
 E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.csproj.CopyComplete
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.dll
+E:\VSProjects\FreeLancing\FYP_ASP\FYP_Pharmacy\Generics\obj\Debug\Generics.pdb
