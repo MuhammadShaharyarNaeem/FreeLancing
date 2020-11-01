@@ -102,23 +102,30 @@
                 #region PharmacyInventory
                 case "GetPharmacyInventory":
                     return
-                        " select PharmacyInventory.ID,Medicine.Name,Medicine.BatchNo,Medicine.Price,PharmacyInventory.Quantity,Medicine.RegistrationNbr " +
-                        " from PharmacyInventory with (nolock)" +
-                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID";
+                        " select PharmacyInventory.ID,Medicine.Name,Medicine.BatchNo,Medicine.Price,PharmacyInventory.Quantity  " +
+                        " from PharmacyInventory with (nolock) " +
+                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID " +
+                        " where PharmacyID = @arg0 ";
                 case "GetPharmacyInventoryByID":
                     return
-                        " select ID as [ID], Medicine.ID as [MedicineID], Medicine.Name as [MedicineName], Quantity " +
+                        " select PharmacyInventory.ID as [ID], Medicine.ID as [MedicineID], Medicine.Name as [MedicineName], Quantity " +
                         " from PharmacyInventory with (nolock) " +
-                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID ";
+                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID " +
+                        " where PharmacyInventory.id = @arg0";
                 case "InsertPharmacyInventory":
                     return
-                        " insert into PharmacyInventory (MedicineID,Quantity) values (@arg0,@arg1)";
+                        " insert into PharmacyInventory (MedicineID,PharmacyID,Quantity) values (@arg0,@arg1,@arg2)";
                 case "UpdatePharmacyInventory":
                     return
-                        " update PharmacyInventory set MedicineID = @arg0 and Quantity = @arg1 where id = @arg2";
+                        " update PharmacyInventory set MedicineID = @arg0, Quantity = @arg1 where id = @arg2";
                 case "DeletePharmacyInventory":
                     return
                         " delete from PharmacyInventory where id = @arg0";
+                case "GetPharmacyMedicine":
+                    return
+                        " select ID,Name + '-' + BatchNo as [Name] " +
+                        " from medicine " +
+                        " where ExpiryDate >= GetDate()";
                 #endregion
                 default:
                     return "";

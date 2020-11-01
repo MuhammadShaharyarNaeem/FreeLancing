@@ -10,6 +10,15 @@
         public const int noError = 0;
         private static readonly string noErrorString = "No Error";
 
+        public const int NullError = 1000001;
+        private static readonly string NullErrorString = "Cannot be Empty";
+
+        public const int NumberError = 1000002;
+        private static readonly string NumberErrorString = "Field only Allows Numbers";
+
+        public const int MaxCharacterError = 1000003;
+        private static readonly string MaxCharacterErrorString = "Field character Limit Reached";
+
         public const int GeneralSqlError = 2000000;
         private static readonly string GeneralSqlErrorString = "An Exception Occured while Executing Sql Statement";
 
@@ -28,6 +37,9 @@
             switch (ErrorCode)
             {
                 case noError: return noErrorString;
+                case NullError: return NullErrorString;
+                case NumberError: return NumberErrorString;
+                case MaxCharacterError: return MaxCharacterErrorString;
                 case GeneralSqlError: return GeneralSqlErrorString;
                 case SqlConnectionError: return SqlConnectionErrorString;
                 case RecordsNotFound: return RecordsNotFoundString;

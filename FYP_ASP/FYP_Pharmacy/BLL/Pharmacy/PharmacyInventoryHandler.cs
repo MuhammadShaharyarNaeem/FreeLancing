@@ -12,8 +12,10 @@ namespace BLL.Pharmacy
         public DataTable dt = new DataTable();
 
         public override void DoFillGridAction()
+        { }
+        public void DoFillGridAction(int ID)
         {
-            SQLHandler sql = new SQLHandler();
+            SQLHandler sql = new SQLHandler(new ArrayList() { ID });
             dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetPharmacyInventory"));
             MessageCollection.copyFrom(sql.Messages);
 
@@ -49,6 +51,7 @@ namespace BLL.Pharmacy
                 });
             }
         }
+
         public override void Insert(PharmacyInventoryModel model)
         {
             var Params = new ArrayList()
@@ -88,6 +91,26 @@ namespace BLL.Pharmacy
         public override void DoAction()
         {
             throw new NotImplementedException();
+        }
+
+        public void DoFillDropDownAction()
+        {
+            SQLHandler sql = new SQLHandler();
+            dt = sql.ExecuteSqlReterieve(SqlCache.GetSql("GetPharmacyMedicine"));
+            MessageCollection.copyFrom(sql.Messages);
+
+            if (dt == null || dt.Rows.Count <= 0)
+            {
+                MessageCollection.addMessage(new Message()
+                {
+                    Context = "PharmacyInventoryHandler",
+                    ErrorCode = ErrorCache.RecordsNotFound,
+                    ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.RecordsNotFound),
+                    isError = true,
+                    LogType = Enums.LogType.Exception,
+                    WebPage = "Pharmacy"
+                });
+            }
         }
     }
 }

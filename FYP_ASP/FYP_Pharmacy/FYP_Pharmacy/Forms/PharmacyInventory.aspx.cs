@@ -10,6 +10,7 @@ namespace FYP_Pharmacy.Forms
 {
     public partial class PharmacyInventory : PageActionHandler
     {
+        string PharmacyID { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             #region logging
@@ -39,6 +40,7 @@ namespace FYP_Pharmacy.Forms
                     else
                     {
                         lbl_title.Text = dt.Rows[0]["Pharmacy"].ToString();
+                        PharmacyID = dt.Rows[0]["PharmacyID"].ToString();
                     }
                 }
                 else
@@ -52,6 +54,7 @@ namespace FYP_Pharmacy.Forms
             }
 
             FillGrid();
+            FIllComboBox();
         }
 
         #region Click Actions
@@ -70,23 +73,33 @@ namespace FYP_Pharmacy.Forms
         }
         protected void btn_SaveUpdDel_Click(object sender, EventArgs e)
         {
-            if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+            ValidateFields();
+            if (!MessageCollection.isErrorOccured)
             {
-                DoSaveAction();
+                if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+                {
+                    DoSaveAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+                {
+                    DoUpdateAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
+                {
+                    DoDeleteAction();
+                }
+                pnl_back.Visible = false;
+                pnl_front.Visible = true;
+                EmptyFields();
+                EnableControls();
+                FillGrid();
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+            else
             {
-                DoUpdateAction();
+                MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
-            {
-                DoDeleteAction();
-            }
-            pnl_back.Visible = false;
-            pnl_front.Visible = true;
-            EmptyFields();
-            EnableControls();
-            FillGrid();
         }
         #endregion
 
@@ -157,14 +170,14 @@ namespace FYP_Pharmacy.Forms
             txt_qty.Text = string.Empty;
             ddl_Medicine.DataSource = null;
             ddl_Medicine.DataBind();
-            
+
         }
         public void DisableControls()
         {
             txt_id.Enabled = false;
             txt_qty.Enabled = false;
             ddl_Medicine.Enabled = false;
-            
+
         }
         public void EnableControls()
         {
@@ -173,8 +186,9 @@ namespace FYP_Pharmacy.Forms
         }
         public void FillGrid()
         {
+
             PharmacyInventoryHandler PharmacyInventoryHandler = new PharmacyInventoryHandler();
-            PharmacyInventoryHandler.DoFillGridAction();
+            PharmacyInventoryHandler.DoFillGridAction(Convert.ToInt32(PharmacyID));
             DataTable gridData = PharmacyInventoryHandler.dt;
             MessageCollection.copyFrom(PharmacyInventoryHandler.MessageCollection);
 
@@ -213,18 +227,53 @@ namespace FYP_Pharmacy.Forms
         {
             return new PharmacyInventoryModel()
             {
-                Quantity=Convert.ToInt32(txt_qty.Text),
+                Quantity = Convert.ToInt32(txt_qty.Text),
                 MedicineID = Convert.ToInt32(ddl_Medicine.SelectedValue.ToString()),
                 PharmacyID = Convert.ToInt32(((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["PharmacyID"].ToString()),
                 ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text)
             };
+        }
+
+        public void ValidateFields()
+        {
+            ValidationHandler validation = new ValidationHandler();
+
+            validation.CheckNumber(ref txt_qty, "Quantity ");
+            validation.CheckMaxLength(ref txt_qty, "Quantity ", 30);
+
+            validation.CheckNull(ref ddl_Medicine, "Medicine");
+            MessageCollection.copyFrom(validation.messageCollection);
+
+        }
+        public void FIllComboBox()
+        {
+            PharmacyInventoryHandler PharmacyInventoryHandler = new PharmacyInventoryHandler();
+            PharmacyInventoryHandler.DoFillDropDownAction();
+            DataTable ddlData = PharmacyInventoryHandler.dt;
+            MessageCollection.copyFrom(PharmacyInventoryHandler.MessageCollection);
+
+            if (MessageCollection.isErrorOccured)
+            {
+                MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
+            }
+            else
+            {
+                ddl_Medicine.DataSource = ddlData;
+                ddl_Medicine.DataTextField = "Name";
+                ddl_Medicine.DataValueField = "ID";
+                ddl_Medicine.DataBind();
+                ddl_Medicine.Enabled = true;
+            }
+
         }
         #endregion
 
         protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
-            
+
             int ID = int.Parse(gridView.DataKeys[rowIndex].Value.ToString());
             FillFields(ID);
 
