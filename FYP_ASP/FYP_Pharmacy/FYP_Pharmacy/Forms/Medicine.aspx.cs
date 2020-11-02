@@ -28,11 +28,31 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
-            if (Session != null && Session[Enums.SessionName.UserDetails.ToString()] != null)
+            if (Session != null)
             {
-                lbl_title.Text = ((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["Company"].ToString();
-                PharmaCompanyID = Convert.ToInt32(((DataTable)Session[Enums.SessionName.UserDetails.ToString()]).Rows[0]["CompanyID"].ToString());
+                DataTable dt = (DataTable)Session[Generics.Enums.SessionName.UserDetails.ToString()];
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    if (string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) || Convert.ToInt32(dt.Rows[0]["accesslevel"].ToString()) != (int)Enums.AccessLevel.CompanyAdmin)
+                    {
+                        Response.Redirect("login.aspx");
+                    }
+                    else
+                    {
+                        lbl_title.Text = dt.Rows[0]["Company"].ToString();
+                        PharmaCompanyID = Convert.ToInt32(dt.Rows[0]["CompanyID"].ToString());
+                    }
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
             }
+            else
+            {
+                Response.Redirect("login.aspx");
+            }
+                
             FillGrid();
         }
 
@@ -52,23 +72,33 @@ namespace FYP_Pharmacy.Forms
         }
         protected void btn_SaveUpdDel_Click(object sender, EventArgs e)
         {
-            if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+            ValidateFields();
+            if (!MessageCollection.isErrorOccured)
             {
-                DoSaveAction();
+                if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+                {
+                    DoSaveAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+                {
+                    DoUpdateAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
+                {
+                    DoDeleteAction();
+                }
+                pnl_back.Visible = false;
+                pnl_front.Visible = true;
+                EmptyFields();
+                EnableControls();
+                FillGrid();
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+            else
             {
-                DoUpdateAction();
+                MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
-            {
-                DoDeleteAction();
-            }
-            pnl_back.Visible = false;
-            pnl_front.Visible = true;
-            EmptyFields();
-            EnableControls();
-            FillGrid();
         }
         #endregion
 
@@ -219,6 +249,23 @@ namespace FYP_Pharmacy.Forms
                 ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text),
                 PharmaCompanyID = PharmaCompanyID
             };
+        }
+
+        public void ValidateFields()
+        {
+            ValidationHandler validation = new ValidationHandler();
+            validation.CheckNull(ref txt_name, "Name ");
+            validation.CheckMaxLength(ref txt_name, "Name ", 30);
+            validation.CheckNull(ref txt_exp, "ExpiryDate ");
+            validation.CheckNull(ref txt_mfg, "MfgDate ");
+            validation.CheckNull(ref txt_batch, "Batch Number ");
+            validation.CheckMaxLength(ref txt_batch, "Batch Number ", 30);
+            validation.CheckNumber(ref txt_price, "Price ");
+            validation.CheckMaxLength(ref txt_price, "Price ", 30);
+            validation.CheckNumber(ref txt_qrcode, "QrCode ");
+            validation.CheckMaxLength(ref txt_qrcode, "QrCode ", 30);
+            MessageCollection.copyFrom(validation.messageCollection);
+
         }
         #endregion
         protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)

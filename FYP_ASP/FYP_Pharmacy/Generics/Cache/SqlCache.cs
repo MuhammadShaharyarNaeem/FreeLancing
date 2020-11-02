@@ -12,8 +12,7 @@
                         " PharmaCompany.Name [Company], PharmaCompany.ID as [CompanyID], Pharmacy.Name as [Pharmacy], Pharmacy.ID as [PharmacyID], accessLevel as [AccessLevel] " +
                         " from users with (nolock) " +
                         " left join PharmaCompany with (nolock) on PharmaCompany.ID = users.PharmaCompanyID " +
-                        " left join Operator with (nolock) on Operator.ID = users.OperatorID " +
-                        " left join pharmacy with (nolock) on Operator.PharmacyID = pharmacy.ID " +
+                        " left join pharmacy with (nolock) on Users.PharmacyID = pharmacy.ID " +
                         " where users.LoginName = @arg0 and users.Password = @arg1";
                 case "GetMedicineData":
                     return
@@ -22,26 +21,25 @@
                 case "GetUsers":
                     return
                         " select users.id as [ID], loginname as [Name],accesslevel as [AccessLevel], " +
-                        " case when PharmacyID !=null then pharmacy.name else pharmacompany.name end as [Company] " +
+                        " case when PharmacyID is not null then pharmacy.name else pharmacompany.name end as [Company] " +
                         " from users with(nolock) " +
                         " left join PharmaCompany with(nolock) on PharmaCompany.ID = PharmaCompanyID " +
-                        " left join Operator with(nolock) on Operator.ID = OperatorID " +
-                        " left join pharmacy with(nolock) on Pharmacy.ID = Operator.PharmacyID ";
+                        " left join pharmacy with(nolock) on Pharmacy.ID = PharmacyID ";
                 case "GetUser":
                     return
                         " select users.id as [ID], loginname as [Name],accesslevel as [AccessLevel], password as [Password]," +
-                        " case when PharmacyID !=null then PharmacyID else PharmaCompanyID end as [Company] " +
+                        " case when PharmacyID is not null then PharmacyID else PharmaCompanyID end as [Company]," +
+                        " users.name as [UserName], users.contactnumber as [contactnumber], users.email as [email] " +
                         " from users with(nolock) " +
                         " left join PharmaCompany with(nolock) on PharmaCompany.ID = PharmaCompanyID " +
-                        " left join Operator with(nolock) on Operator.ID = OperatorID " +
-                        " left join pharmacy with(nolock) on Pharmacy.ID = Operator.PharmacyID " +
+                        " left join pharmacy with(nolock) on Pharmacy.ID = PharmacyID " +
                         " where users.id = @arg0";
                 case "InsertUser":
                     return
-                        "insert into users(LoginName,Password,AccessLevel,PharmaCompanyID,OperatorID) values(@arg0 ,@arg1 ,@arg2 ,@arg3 ,@arg4) ";
+                        "insert into users(LoginName,Password,AccessLevel,PharmaCompanyID,PharmacyID,Name,Email,ContactNumber) values(@arg0 ,@arg1 ,@arg2 ,@arg3 ,@arg4, @arg5, @arg6, @arg7) ";
                 case "UpdateUser":
                     return
-                        "update users set LoginName=@arg0, Password=@arg1, AccessLevel=@arg2, PharmaCompanyID=@arg3, OperatorID= @arg4 where id = @arg5 ";
+                        "update users set LoginName=@arg0, Password=@arg1, AccessLevel=@arg2, PharmaCompanyID=@arg3, PharmacyID= @arg4,Name=@arg6,Email=@arg7,ContactNumber=@arg8 where id = @arg5 ";
                 case "DeleteUser":
                     return
                         "delete from users where id= @arg0";
@@ -53,7 +51,7 @@
                 #region PharmaCompany
                 case "GetPharmaCompanys":
                     return
-                        "select ID,Name,Email,ContactNumber,Description,Address from PharmaCompany with (nolock)";
+                        "select ID,Name,Email,ContactNumber,Description from PharmaCompany with (nolock)";
                 case "GetPharmaCompany":
                     return
                         "select ID,Name,Email,ContactNumber,Description,Address from PharmaCompany with (nolock) where ID=@arg0";
@@ -100,33 +98,51 @@
                 case "DeleteMedicine":
                     return
                         "delete from Medicine where id = @arg0";
-                case "GetMedicinesForQRCode":
-                    return
-                        "select ID,Name,QRCode,convert(varchar, ExpiryDate, 101) as [ExpiryDate],convert(varchar, MfgDate, 101) as [MfgDate],BatchNo,Price from Medicine with (nolock) where QRCode=@arg0";
                 #endregion
                 #region PharmacyInventory
                 case "GetPharmacyInventory":
                     return
-                        " select PharmacyInventory.ID,Medicine.Name,Medicine.BatchNo,Medicine.Price,PharmacyInventory.Quantity,Medicine.RegistrationNbr " +
-                        " from PharmacyInventory with (nolock)" +
-                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID";
+                        " select PharmacyInventory.ID,Medicine.Name,Medicine.BatchNo,Medicine.Price,PharmacyInventory.Quantity  " +
+                        " from PharmacyInventory with (nolock) " +
+                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID " +
+                        " where PharmacyID = @arg0 ";
                 case "GetPharmacyInventoryByID":
                     return
-                        " select ID as [ID], Medicine.ID as [MedicineID], Medicine.Name as [MedicineName], Quantity " +
+                        " select PharmacyInventory.ID as [ID], Medicine.ID as [MedicineID], Medicine.Name as [MedicineName], Quantity " +
                         " from PharmacyInventory with (nolock) " +
-                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID ";
+                        " inner join Medicine with (nolock) on Medicine.ID = PharmacyInventory.MedicineID " +
+                        " where PharmacyInventory.id = @arg0";
                 case "InsertPharmacyInventory":
                     return
-                        " insert into PharmacyInventory (MedicineID,Quantity) values (@arg0,@arg1)";
+                        " insert into PharmacyInventory (MedicineID,PharmacyID,Quantity) values (@arg0,@arg1,@arg2)";
                 case "UpdatePharmacyInventory":
                     return
-                        " update PharmacyInventory set MedicineID = @arg0 and Quantity = @arg1 where id = @arg2";
-                case "DecrementPharmacyInventory":
-                    return
-                        " update PharmacyInventory set MedicineID = @arg1 and Quantity = (Quantity - 1) where pharmacyid = @arg0 and MedicineID=@arg1";
+                        " update PharmacyInventory set MedicineID = @arg0, Quantity = @arg1 where id = @arg2 and PharmacyID = @arg3";
                 case "DeletePharmacyInventory":
                     return
                         " delete from PharmacyInventory where id = @arg0";
+                case "GetPharmacyMedicine":
+                    return
+                        " select ID,Name + '-' + BatchNo as [Name] " +
+                        " from medicine " +
+                        " where ExpiryDate >= GetDate()";
+                #endregion
+                #region PharmacyPOS
+                case "GetPOSMedicine":
+                        return
+                        " select PharmacyInventory.ID ,Name,convert(varchar, ExpiryDate, 101) as [ExpiryDate], convert(varchar, MfgDate, 101) as [MfgDate],BatchNo,Price,Quantity,medicine.qrcode as [QRCode] " +
+                        " from medicine with(nolock) " +
+                        " left join PharmacyInventory on PharmacyInventory.MedicineID = medicine.id " +
+                        " where PharmacyID = @arg0 and QRCode = @arg1 ";
+                case "InsertCustomer":
+                    return
+                        " insert into customer (name) values (@arg0) ";
+                case "UpdatePharmacyPOSInventory":
+                    return
+                        " update PharmacyInventory set quantity = quantity - 1 where id = @arg0";
+                case "InsertPurchaseDetails":
+                    return
+                        " Insert into purchasedetails(Name,PurchaseDate,Amount) values (@arg0,getdate(),@arg1)";
                 #endregion
                 default:
                     return "";

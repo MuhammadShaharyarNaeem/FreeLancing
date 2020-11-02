@@ -42,22 +42,13 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.Panel pnl_front;
 
         /// <summary>
-        /// qrcodelbl control.
+        /// txt_qrcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label qrcodelbl;
-
-        /// <summary>
-        /// qrcodebox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox qrcodebox;
+        protected global::System.Web.UI.WebControls.TextBox txt_qrcode;
 
         /// <summary>
         /// gridView control.
@@ -69,85 +60,31 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.GridView gridView;
 
         /// <summary>
-        /// pnl_back control.
+        /// txt_total control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_back;
+        protected global::System.Web.UI.WebControls.TextBox txt_total;
 
         /// <summary>
-        /// txt_id control.
+        /// txt_cust control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_id;
+        protected global::System.Web.UI.WebControls.TextBox txt_cust;
 
         /// <summary>
-        /// txt_name control.
+        /// btn_Save control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_name;
-
-        /// <summary>
-        /// txt_qrcode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_qrcode;
-
-        /// <summary>
-        /// txt_exp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_exp;
-
-        /// <summary>
-        /// txt_mfg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_mfg;
-
-        /// <summary>
-        /// txt_batch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_batch;
-
-        /// <summary>
-        /// txt_price control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_price;
-
-        /// <summary>
-        /// btn_SaveUpdDel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_SaveUpdDel;
+        protected global::System.Web.UI.WebControls.Button btn_Save;
 
         /// <summary>
         /// btn_cancel control.

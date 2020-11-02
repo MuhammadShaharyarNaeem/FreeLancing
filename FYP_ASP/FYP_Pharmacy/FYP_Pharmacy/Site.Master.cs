@@ -15,12 +15,13 @@ namespace FYP_Pharmacy
                 {
                     if (!string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) && dt.Rows[0]["accesslevel"].ToString() == "1001")
                     {
-                        medPage.Visible = true;
+                        medPage.Visible = false;
                         pharmacompanypage.Visible = true;
                         pharmacypage.Visible = true;
                         userspage.Visible = true;
                         pharmaInventory.Visible = true;
                         PosPage.Visible = true;
+                        logoutbtn.Visible = true;
                     }
                     else if (!string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) && dt.Rows[0]["accesslevel"].ToString() == "1002")
                     {
@@ -30,6 +31,7 @@ namespace FYP_Pharmacy
                         userspage.Visible = false;
                         pharmaInventory.Visible = false;
                         PosPage.Visible = false;
+                        logoutbtn.Visible = true;
                     }
                     else if (!string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) && dt.Rows[0]["accesslevel"].ToString() == "1003")
                     {
@@ -39,6 +41,7 @@ namespace FYP_Pharmacy
                         userspage.Visible = false;
                         pharmaInventory.Visible = true;
                         PosPage.Visible = true;
+                        logoutbtn.Visible = true;
                     }
                     else if (!string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) && dt.Rows[0]["accesslevel"].ToString() == "1004")
                     {
@@ -48,6 +51,7 @@ namespace FYP_Pharmacy
                         userspage.Visible = false;
                         pharmaInventory.Visible = false;
                         PosPage.Visible = true;
+                        logoutbtn.Visible = true;
                     }
                 }
             }

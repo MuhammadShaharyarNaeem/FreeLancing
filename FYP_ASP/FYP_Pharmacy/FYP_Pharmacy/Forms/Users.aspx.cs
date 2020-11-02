@@ -27,6 +27,26 @@ namespace FYP_Pharmacy.Forms
             });
             #endregion
 
+            if (Session != null)
+            {
+                DataTable dt = (DataTable)Session[Generics.Enums.SessionName.UserDetails.ToString()];
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    if (string.IsNullOrWhiteSpace(dt.Rows[0]["accesslevel"].ToString()) || dt.Rows[0]["accesslevel"].ToString() != "1001")
+                    {
+                        Response.Redirect("login.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("login.aspx");
+            }
+
             FillGrid();
         }
 
@@ -46,23 +66,33 @@ namespace FYP_Pharmacy.Forms
         }
         protected void btn_SaveUpdDel_Click(object sender, EventArgs e)
         {
-            if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+            ValidateFields();
+            if (!this.MessageCollection.isErrorOccured)
             {
-                DoSaveAction();
+                if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Save.ToString()))
+                {
+                    DoSaveAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+                {
+                    DoUpdateAction();
+                }
+                else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
+                {
+                    DoDeleteAction();
+                }
+                pnl_back.Visible = false;
+                pnl_front.Visible = true;
+                EmptyFields();
+                EnableControls();
+                FillGrid();
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Update.ToString()))
+            else
             {
-                DoUpdateAction();
+                MessageCollection.PublishLog();
+                lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                lbl_err.Visible = true;
             }
-            else if (btn_SaveUpdDel.Text.Equals(Enums.ButtonControl.Delete.ToString()))
-            {
-                DoDeleteAction();
-            }
-            pnl_back.Visible = false;
-            pnl_front.Visible = true;
-            EmptyFields();
-            EnableControls();
-            FillGrid();
         }
         #endregion
 
@@ -73,6 +103,12 @@ namespace FYP_Pharmacy.Forms
                 ddl_Company.DataSource = null;
                 ddl_Company.DataBind();
                 ddl_Company.Enabled = false;
+
+                if (ddl_Company.SelectedItem != null && !string.IsNullOrEmpty(ddl_Company.SelectedItem.Text.ToString()))
+                {
+                    ddl_Company.SelectedItem.Text = "";
+                    ddl_Company.SelectedItem.Value = "";
+                }
             }
             else
             {
@@ -86,7 +122,6 @@ namespace FYP_Pharmacy.Forms
                     MessageCollection.PublishLog();
                     lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
                     lbl_err.Visible = true;
-                    
                 }
                 else
                 {
@@ -109,7 +144,9 @@ namespace FYP_Pharmacy.Forms
                     }
                 }
             }
+
             
+
         }
 
         #region DML Methods
@@ -179,6 +216,9 @@ namespace FYP_Pharmacy.Forms
             txt_pw.Text = string.Empty;
             txt_id.Text = string.Empty;
             txt_pw.Attributes["value"] = string.Empty;
+            txt_nam.Text = string.Empty;
+            txt_email.Text = string.Empty;
+            txt_cntct.Text = string.Empty;
             ddl_accesslevel.SelectedIndex = 0;
             ddl_Company.DataSource = null;
             ddl_Company.DataBind();
@@ -195,12 +235,18 @@ namespace FYP_Pharmacy.Forms
             txt_usr.Enabled = false;
             ddl_accesslevel.Enabled = false;
             ddl_Company.Enabled = false;
+            txt_nam.Enabled = false;
+            txt_email.Enabled = false;
+            txt_cntct.Enabled = false;
         }
         public void EnableControls()
         {
             txt_pw.Enabled = true;
             txt_usr.Enabled = true;
             ddl_accesslevel.Enabled = true;
+            txt_nam.Enabled = true;
+            txt_email.Enabled = true;
+            txt_cntct.Enabled = true;
         }
         public void FillGrid()
         {
@@ -241,6 +287,9 @@ namespace FYP_Pharmacy.Forms
                 ddl_accesslevel.SelectedValue = UserData.Rows[0]["AccessLevel"].ToString();
                 ddl_accesslevel_SelectedIndexChanged(this, null);
                 ddl_Company.SelectedValue = UserData.Rows[0]["Company"].ToString();
+                txt_nam.Text = UserData.Rows[0]["username"].ToString();
+                txt_cntct.Text = UserData.Rows[0]["contactnumber"].ToString();
+                txt_email.Text = UserData.Rows[0]["email"].ToString();
             }
         }
         public UserModel MapToObject()
@@ -249,10 +298,33 @@ namespace FYP_Pharmacy.Forms
             {
                 AccessLevel = Convert.ToInt32(ddl_accesslevel.SelectedValue),
                 CompanyKey = ddl_Company.SelectedValue,
-                Name = txt_usr.Text.Trim().ToLower(),
+                loginName = txt_usr.Text.Trim().ToLower(),
                 Password = txt_pw.Text,
-                ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text)
+                ID = string.IsNullOrWhiteSpace(txt_id.Text) ? 0 : Convert.ToInt32(txt_id.Text),
+                ContactNumber = txt_cntct.Text,
+                UserName = txt_nam.Text,
+                Email = txt_email.Text
             };
+        }
+
+        public void ValidateFields()
+        {
+            ValidationHandler validation = new ValidationHandler();
+            validation.CheckNull(ref txt_usr, "LoginName");
+            validation.CheckMaxLength(ref txt_usr, "LoginName ", 30);
+
+            validation.CheckNull(ref txt_pw, "Password ");
+            validation.CheckMaxLength(ref txt_pw, "Password ", 30);
+
+            validation.CheckNull(ref txt_nam, "UserName ");
+            validation.CheckMaxLength(ref txt_nam, "UserName ", 30);
+
+            validation.CheckMaxLength(ref txt_email, "Email ", 30);
+
+            validation.CheckNumber(ref txt_cntct, "Contact Number ");
+            validation.CheckMaxLength(ref txt_cntct, "Contact Number ", 30);
+
+            MessageCollection.copyFrom(validation.messageCollection);
         }
         #endregion
         protected void gridView_RowCommand(object sender, GridViewCommandEventArgs e)

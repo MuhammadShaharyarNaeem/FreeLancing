@@ -69,6 +69,15 @@ namespace FYP_Pharmacy
         protected global::System.Web.UI.HtmlControls.HtmlAnchor pharmaInventory;
 
         /// <summary>
+        /// logoutbtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor logoutbtn;
+
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>
