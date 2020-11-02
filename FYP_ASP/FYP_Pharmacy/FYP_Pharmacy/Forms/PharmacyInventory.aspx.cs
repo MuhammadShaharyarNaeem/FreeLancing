@@ -54,7 +54,6 @@ namespace FYP_Pharmacy.Forms
             }
 
             FillGrid();
-            FIllComboBox();
         }
 
         #region Click Actions
@@ -64,6 +63,7 @@ namespace FYP_Pharmacy.Forms
             pnl_back.Visible = true;
             btn_SaveUpdDel.Text = Enums.ButtonControl.Save.ToString();
             EmptyFields();
+            FIllComboBox();
         }
         protected void btn_cancel_Click(object sender, EventArgs e)
         {
@@ -238,6 +238,7 @@ namespace FYP_Pharmacy.Forms
         {
             ValidationHandler validation = new ValidationHandler();
 
+            validation.CheckNull(ref txt_qty, "Quantity ");
             validation.CheckNumber(ref txt_qty, "Quantity ");
             validation.CheckMaxLength(ref txt_qty, "Quantity ", 30);
 
@@ -276,6 +277,7 @@ namespace FYP_Pharmacy.Forms
 
             int ID = int.Parse(gridView.DataKeys[rowIndex].Value.ToString());
             FillFields(ID);
+            FIllComboBox();
 
             if (e.CommandName.Equals(Enums.GridCommand.EditRow.ToString()))
             {

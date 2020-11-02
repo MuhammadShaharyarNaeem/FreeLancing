@@ -103,6 +103,12 @@ namespace FYP_Pharmacy.Forms
                 ddl_Company.DataSource = null;
                 ddl_Company.DataBind();
                 ddl_Company.Enabled = false;
+
+                if (ddl_Company.SelectedItem != null && !string.IsNullOrEmpty(ddl_Company.SelectedItem.Text.ToString()))
+                {
+                    ddl_Company.SelectedItem.Text = "";
+                    ddl_Company.SelectedItem.Value = "";
+                }
             }
             else
             {
@@ -138,7 +144,9 @@ namespace FYP_Pharmacy.Forms
                     }
                 }
             }
+
             
+
         }
 
         #region DML Methods

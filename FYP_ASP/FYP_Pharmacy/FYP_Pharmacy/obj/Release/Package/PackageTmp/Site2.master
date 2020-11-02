@@ -1,0 +1,205 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site2.master.cs" Inherits="Site2" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <%--    <img src="img/logo-default.png" />--%>
+    <title>Public Mazad - Online Auction site in Jordan</title>
+
+    <!--SEO Meta Tags-->
+    <meta name="description" content="Public Mazad, online auction in Jordan" />
+    <meta name="keywords" content="Online auntion website in Jordan where you can buy stuff at half of its original price." />
+    <meta name="author" content="8Guild" />
+    <!--Mobile Specific Meta Tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="img/coin.png" type="image/x-icon">
+    <link rel="icon" href="img/coin.png" type="image/x-icon">
+    <!--Master Slider Styles-->
+    <link href="masterslider/style/masterslider.css" rel="stylesheet" media="screen">
+    <!--Styles-->
+    <link href="css/styles.css" rel="stylesheet" media="screen">
+    <!--Color Scheme-->
+    <link class="color-scheme" href="css/colors/color-default.css" rel="stylesheet" media="screen">
+    <!--Color Switcher-->
+    <link href="color-switcher/color-switcher.css" rel="stylesheet" media="screen">
+    <!--Modernizr-->
+    <script src="ExternalLib/jquery-1.7.1.js"></script>
+
+    <script src="js/libs/modernizr.custom.js"></script>
+
+    <!--Adding Media Queries Support for IE8-->
+    <!--[if lt IE 9]>
+      <script src="js/plugins/respond.js"></script>
+    <![endif]-->
+
+    <!--Google Analytics-->
+
+    <link href="Assets/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+
+    <script src="Assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+
+    <script src="js/libs/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <link href="css/jquery-ui.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <div>
+        <form id="form1" runat="server">
+            <!--Login Modal-->
+               <asp:ScriptManager ID="ScriptManager1" runat="server">
+      
+    </asp:ScriptManager>
+            <!-- /.modal -->
+
+            <!--Header-->
+            <header data-offset-top="500" data-stuck="600">
+                <!--Mobile Menu Toggle-->
+                <div class="menu-toggle"><i class="fa fa-list"></i></div>
+
+                <div class="container">
+                    <a class="logo" style="background-color: none !important; background: none !important" href="Default.aspx">
+                        <img src="img/logo-default.png" alt="Public Mazad" /></a>
+                </div>
+
+                <!--Main Menu-->
+                <nav class="menu">
+                    <div class="container">
+                        <ul class="main">
+                            <li class="hide-sm"><a href="Auctions.aspx"><span>LIVE</span> AUCTIONS</a>
+                            </li>
+                            <li class="has-submenu"><a href="HowitWork.aspx"><span>HOW</span> IT WORKS</a>
+                            </li>
+
+                            <li class="has-submenu"><a href="FAQ.aspx"><span>FAQ</span></a>
+                            </li>
+
+                            <li class="hide-sm"><a href="Auctions_UpComing.aspx"><span>COMING</span> AUCTIONS</a></li>
+                            <li class="hide-sm"><a href="Aucions_Ended.aspx"><span>ENDED</span> AUCTIONS</a></li>
+                            <li class="hide-sm"><a href="Auction_Winners.aspx"><span>WINNERS</span></a></li>
+
+
+                            <li id="divLogedin" class="dropdown" runat="server">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <asp:Label Text="" ID="lblUserName" runat="server" />
+                                    <div id="divUserBids" runat="server" style="float: right">
+                                   
+                                         [<asp:Label ID="Label1" Text="Bids:" runat="server" />
+                                        
+                                                <asp:Label ID="lblUserBids" Text="" runat="server" />]
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li style="width: 100%;">
+                                        <asp:LinkButton ID="lbtnDashboard" Font-Size="small" runat="server" OnClick="lbtnDashboard_Click"><i class=" fa fa-dashboard"></i> &nbsp; Dashboard</asp:LinkButton></li>
+                                    <li style="width: 100%;">
+                                        <asp:LinkButton ID="lbtnLogout" Font-Size="small" runat="server" OnClick="lbtnLogout_Click"><i class="fa fa-key"></i> &nbsp;Log Out</asp:LinkButton></li>
+                                </ul>
+                            </li>
+                            <li class="hide-sm"></li>
+
+
+
+                        </ul>
+                    </div>
+                    <div class="catalog-block">
+                        <div class="container">
+                            <ul class="catalog">
+                                <li class="has-submenu"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="toolbar-container">
+                    <div class="container">
+                        <!--Toolbar-->
+                        <div class="toolbar group">
+                            <div id="divLogout" runat="server">
+                                <a class="login-btn btn-outlined-invert" href="Login.aspx">
+                                    <i class="icon-profile"></i>
+                                    <span style="font-size: 15px;"><b>L</b>ogin</span>
+                                </a>
+                            </div>
+                            <!-- user login dropdown start-->
+
+
+                        </div>
+                        <!--Toolbar Close-->
+
+
+                    </div>
+                </div>
+                <%-- <div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'></div>
+                <script type='text/javascript'>setTimeout(function () { { var s = document.createElement('script'); s.type = 'text/javascript'; s.charset = 'UTF-8'; s.src = ((location && location.href && location.href.indexOf('https') == 0) ? 'https://ssl.microsofttranslator.com' : 'http://www.microsofttranslator.com') + '/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&ctf=False&ui=true&settings=Manual&from='; var p = document.getElementsByTagName('head')[0] || document.documentElement; p.insertBefore(s, p.firstChild); } }, 0);</script>--%>
+            </header>
+
+            <!--Header Close-->
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </form>
+        <!--Footer-->
+        <footer class="footer">
+
+            <!--Sticky Buttons-->
+            <div class="sticky-btns">
+
+
+
+                <span id="scrollTop-btn"><i class="fa fa-chevron-up"></i></span>
+            </div>
+            <!--Sticky Buttons Close-->
+
+            <!----//End-contact---->
+        </footer>
+        <div class="copyright">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; font-weight: bold;">
+                    <p>&nbsp; &copy; 2016 Al Nahhat for e Services.</p>
+                    <br />
+                </div>
+
+            </div>
+        </div>
+        <!--Footer Close-->
+
+        <!--Javascript (jQuery) Libraries and Plugins-->
+        <script src="js/libs/jquery-1.11.1.min.js"></script>
+        <script src="js/libs/jquery-ui-1.10.4.custom.min.js"></script>
+        <script src="js/libs/jquery.easing.min.js"></script>
+        <script src="js/plugins/bootstrap.min.js"></script>
+        <script src="js/plugins/smoothscroll.js"></script>
+        <script src="js/plugins/jquery.validate.min.js"></script>
+        <script src="js/plugins/icheck.min.js"></script>
+        <script src="js/plugins/jquery.placeholder.js"></script>
+        <script src="js/plugins/jquery.stellar.min.js"></script>
+        <script src="js/plugins/jquery.touchSwipe.min.js"></script>
+        <script src="js/plugins/jquery.shuffle.min.js"></script>
+        <script src="js/plugins/lightGallery.min.js"></script>
+        <script src="js/plugins/owl.carousel.min.js"></script>
+        <script src="js/plugins/masterslider.min.js"></script>
+        <script src="js/scripts.js"></script>
+
+        <script src="color-switcher/color-switcher.js"></script>
+
+        <script src="Assets/bootstrap/js/bootstrap-datetimepicker.fi.js"></script>
+        <script src="Assets/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+
+        <script type="text/javascript">
+
+            function numericFilter(txb) {
+                txb.value = txb.value.replace(/[^\0-9]/ig, "");
+            }
+        </script>
+
+
+    </div>
+
+</body>
+</html>

@@ -21,14 +21,14 @@
                 case "GetUsers":
                     return
                         " select users.id as [ID], loginname as [Name],accesslevel as [AccessLevel], " +
-                        " case when PharmacyID !=null then pharmacy.name else pharmacompany.name end as [Company] " +
+                        " case when PharmacyID is not null then pharmacy.name else pharmacompany.name end as [Company] " +
                         " from users with(nolock) " +
                         " left join PharmaCompany with(nolock) on PharmaCompany.ID = PharmaCompanyID " +
                         " left join pharmacy with(nolock) on Pharmacy.ID = PharmacyID ";
                 case "GetUser":
                     return
                         " select users.id as [ID], loginname as [Name],accesslevel as [AccessLevel], password as [Password]," +
-                        " case when PharmacyID !=null then PharmacyID else PharmaCompanyID end as [Company]," +
+                        " case when PharmacyID is not null then PharmacyID else PharmaCompanyID end as [Company]," +
                         " users.name as [UserName], users.contactnumber as [contactnumber], users.email as [email] " +
                         " from users with(nolock) " +
                         " left join PharmaCompany with(nolock) on PharmaCompany.ID = PharmaCompanyID " +
@@ -117,7 +117,7 @@
                         " insert into PharmacyInventory (MedicineID,PharmacyID,Quantity) values (@arg0,@arg1,@arg2)";
                 case "UpdatePharmacyInventory":
                     return
-                        " update PharmacyInventory set MedicineID = @arg0, Quantity = @arg1 where id = @arg2";
+                        " update PharmacyInventory set MedicineID = @arg0, Quantity = @arg1 where id = @arg2 and PharmacyID = @arg3";
                 case "DeletePharmacyInventory":
                     return
                         " delete from PharmacyInventory where id = @arg0";

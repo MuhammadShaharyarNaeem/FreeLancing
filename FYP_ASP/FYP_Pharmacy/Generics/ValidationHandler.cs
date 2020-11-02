@@ -1,4 +1,5 @@
 ﻿using Generics.Cache;
+using System.Data;
 using System.Web.UI.WebControls;
 
 namespace Generics
@@ -9,7 +10,7 @@ namespace Generics
         public string PageName { get; set; }
         public void CheckNull(ref TextBox textBox, string FieldName)
         {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
+            if (string.IsNullOrWhiteSpace(textBox.Text) && string.IsNullOrWhiteSpace(textBox.Attributes["value"]))
             {
                 messageCollection.addMessage(new Message()
                 {
@@ -22,7 +23,6 @@ namespace Generics
                 });
             }
         }
-
         public void CheckNull(ref DropDownList dropDownList, string FieldName)
         {
             if (string.IsNullOrWhiteSpace(dropDownList.SelectedValue))
@@ -39,6 +39,21 @@ namespace Generics
             }
         }
 
+        public void CheckNull(ref DataTable dt, string FieldName)
+        {
+            if (dt is null || dt.Rows.Count <= 0)
+            {
+                messageCollection.addMessage(new Message()
+                {
+                    Context = "ValidationHandler",
+                    ErrorCode = ErrorCache.NullError,
+                    ErrorMessage = FieldName + ErrorCache.getErrorMessage(ErrorCache.NullError),
+                    isError = true,
+                    LogType = Enums.LogType.Exception,
+                    WebPage = PageName
+                });
+            }
+        }
         public void CheckNumber(ref TextBox textBox, string FieldName)
         {
             int number;

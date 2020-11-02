@@ -70,9 +70,10 @@ namespace BLL.Pharmacy
             var Params = new ArrayList()
             {
                 model.MedicineID,
-                model.PharmacyID,
                 model.Quantity,
-                model.ID
+                model.ID,
+                model.PharmacyID
+                
             };
 
             SQLHandler sql = new SQLHandler(Params);

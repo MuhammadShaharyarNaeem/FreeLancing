@@ -134,7 +134,7 @@ namespace FYP_Pharmacy.Forms
                         }
                         else
                         {
-                            medQuantity.Add(qrCode, Convert.ToInt32(ValueRow["Quantity"]));
+                            medQuantity.Add(qrCode, Convert.ToInt32(ValueRow["Quantity"]) - 1);
                         }
 
                         if (!MessageCollection.isErrorOccured)
@@ -157,12 +157,32 @@ namespace FYP_Pharmacy.Forms
                     }
                     else
                     {
-                        ViewState[Enums.SessionName.POSdetail.ToString()] = dt;
-                        medQuantity.Add(dt.Rows[0]["qrcode"].ToString(), Convert.ToInt32(dt.Rows[0]["quantity"]) - 1);
-                        ViewState[Enums.SessionName.MedicineDetail.ToString()] = medQuantity;
-                        gridView.DataSource = dt;
-                        gridView.DataBind();
-                        CalculateSum(dt);
+                        if (Convert.ToInt32(dt.Rows[0]["quantity"]) != 0)
+                        {
+                            ViewState[Enums.SessionName.POSdetail.ToString()] = dt;
+                            medQuantity.Add(dt.Rows[0]["qrcode"].ToString(), Convert.ToInt32(dt.Rows[0]["quantity"]) - 1);
+                            ViewState[Enums.SessionName.MedicineDetail.ToString()] = medQuantity;
+                            gridView.DataSource = dt;
+                            gridView.DataBind();
+                            CalculateSum(dt);
+                        }
+                        else
+                        {
+                            MessageCollection.addMessage(new Message()
+                            {
+                                Context = "PharmacyPOS",
+                                LogType = Enums.LogType.Exception,
+                                WebPage = "PharmacyPOS",
+                                isError = true,
+                                ErrorCode = ErrorCache.NoQuantityLeftError,
+                                ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.NoQuantityLeftError)
+                            });
+
+                            MessageCollection.PublishLog();
+                            lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                            lbl_err.Visible = true;
+                        }
+                        
                     }
                 }
             }
@@ -173,33 +193,44 @@ namespace FYP_Pharmacy.Forms
 
         protected void btn_Save_Click(object sender, EventArgs e)
         {
-            var Griddt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
 
-            PharmacyPOSHandler handler = new PharmacyPOSHandler();
-            handler.InsertCustomer(MapModelForInsertion());
-            MessageCollection.copyFrom(handler.MessageCollection);
-
-
-            if (!MessageCollection.isErrorOccured)
+            ValidateFields();
+            if (!this.MessageCollection.isErrorOccured)
             {
-                foreach (DataRow dr in Griddt.Rows)
+                var Griddt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
+
+                PharmacyPOSHandler handler = new PharmacyPOSHandler();
+                handler.InsertCustomer(MapModelForInsertion());
+                MessageCollection.copyFrom(handler.MessageCollection);
+
+
+                if (!MessageCollection.isErrorOccured)
                 {
-                    var model = MapModelForInsertion(dr);
-                    handler.Update(model);
+                    foreach (DataRow dr in Griddt.Rows)
+                    {
+                        var model = MapModelForInsertion(dr);
+                        handler.Update(model);
+                    }
+                }
+                MessageCollection.copyFrom(handler.MessageCollection);
+                if (MessageCollection.isErrorOccured)
+                {
+                    MessageCollection.PublishLog();
+                    lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
+                    lbl_err.Visible = true;
+                }
+                else
+                {
+                    lbl_err.Text = "Record Inserted Successfully";
+                    lbl_err.Style.Add("color", "#FF008000");
+                    btn_cancel_Click(null, null);
                 }
             }
-            MessageCollection.copyFrom(handler.MessageCollection);
-            if (MessageCollection.isErrorOccured)
+            else
             {
                 MessageCollection.PublishLog();
                 lbl_err.Text = MessageCollection.Messages[MessageCollection.Messages.Count - 1].ErrorMessage;
                 lbl_err.Visible = true;
-            }
-            else
-            {
-                lbl_err.Text = "Record Inserted Successfully";
-                lbl_err.Style.Add("color", "#FF008000");
-                btn_cancel_Click(null, null);
             }
 
         }
@@ -239,6 +270,16 @@ namespace FYP_Pharmacy.Forms
                 MedicineID = Convert.ToInt32(txt_qrcode.Text)
             };
         }
+        public void ValidateFields()
+        {
+            ValidationHandler validation = new ValidationHandler();
 
+            validation.CheckNull(ref txt_cust, "Customer ");            
+            validation.CheckMaxLength(ref txt_cust, "Customer ", 30);
+
+            var dt = (DataTable)ViewState[Enums.SessionName.POSdetail.ToString()];
+            validation.CheckNull(ref dt, "Bill ");
+            MessageCollection.copyFrom(validation.messageCollection);
+        }
     }
 }

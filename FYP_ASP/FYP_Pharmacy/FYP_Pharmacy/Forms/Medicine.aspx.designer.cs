@@ -96,15 +96,6 @@ namespace FYP_Pharmacy.Forms
         protected global::System.Web.UI.WebControls.TextBox txt_qrcode;
 
         /// <summary>
-        /// txt_exp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_exp;
-
-        /// <summary>
         /// txt_mfg control.
         /// </summary>
         /// <remarks>
@@ -112,6 +103,15 @@ namespace FYP_Pharmacy.Forms
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_mfg;
+
+        /// <summary>
+        /// txt_exp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_exp;
 
         /// <summary>
         /// txt_batch control.

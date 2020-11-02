@@ -246,8 +246,10 @@ namespace FYP_Pharmacy.Forms
             validation.CheckNull(ref txt_name, "Name ");
             validation.CheckMaxLength(ref txt_name, "Name ", 30);
 
+            validation.CheckNull(ref txt_email, "Email ");
             validation.CheckMaxLength(ref txt_email, "Email ", 30);
 
+            validation.CheckNull(ref txt_cnumber, "Contact Number ");
             validation.CheckNumber(ref txt_cnumber, "Contact Number ");
             validation.CheckMaxLength(ref txt_cnumber, "Contact Number ", 30);
 
