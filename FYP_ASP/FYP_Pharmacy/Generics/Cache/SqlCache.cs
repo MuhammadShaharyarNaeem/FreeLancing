@@ -8,7 +8,7 @@
             {
                 case "UserLogin":
                     return
-                        " select users.ID as [ID],LoginName as [LoginName],Password as [Password], " +
+                        " select users.ID as [ID],LoginName as [LoginName],Password as [Password],users.Name as [Username], " +
                         " PharmaCompany.Name [Company], PharmaCompany.ID as [CompanyID], Pharmacy.Name as [Pharmacy], Pharmacy.ID as [PharmacyID], accessLevel as [AccessLevel] " +
                         " from users with (nolock) " +
                         " left join PharmaCompany with (nolock) on PharmaCompany.ID = users.PharmaCompanyID " +

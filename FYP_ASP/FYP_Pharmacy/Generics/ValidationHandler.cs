@@ -1,4 +1,5 @@
 ﻿using Generics.Cache;
+using System;
 using System.Data;
 using System.Web.UI.WebControls;
 
@@ -82,6 +83,37 @@ namespace Generics
                     Context = "ValidationHandler",
                     ErrorCode = ErrorCache.MaxCharacterError,
                     ErrorMessage = FieldName + ErrorCache.getErrorMessage(ErrorCache.MaxCharacterError),
+                    isError = true,
+                    LogType = Enums.LogType.Exception,
+                    WebPage = PageName
+                });
+            }
+        }
+
+        public void CheckDateComparison(ref TextBox textBox, ref TextBox textBox2)
+        {
+            if (Convert.ToDateTime(textBox.Text) < Convert.ToDateTime(textBox2.Text))
+            {
+                messageCollection.addMessage(new Message()
+                {
+                    Context = "ValidationHandler",
+                    ErrorCode = ErrorCache.InvalidDateError,
+                    ErrorMessage = ErrorCache.getErrorMessage(ErrorCache.InvalidDateError),
+                    isError = true,
+                    LogType = Enums.LogType.Exception,
+                    WebPage = PageName
+                });
+            }
+        }
+        public void CheckDate(ref TextBox textBox, string FieldName)
+        {
+            if (Convert.ToDateTime(textBox.Text) < DateTime.Now)
+            {
+                messageCollection.addMessage(new Message()
+                {
+                    Context = "ValidationHandler",
+                    ErrorCode = ErrorCache.InvalidDateError,
+                    ErrorMessage = FieldName + ":" + ErrorCache.getErrorMessage(ErrorCache.InvalidDateError),
                     isError = true,
                     LogType = Enums.LogType.Exception,
                     WebPage = PageName

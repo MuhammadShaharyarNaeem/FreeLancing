@@ -264,6 +264,8 @@ namespace FYP_Pharmacy.Forms
             validation.CheckMaxLength(ref txt_price, "Price ", 30);
             validation.CheckNumber(ref txt_qrcode, "QrCode ");
             validation.CheckMaxLength(ref txt_qrcode, "QrCode ", 30);
+            validation.CheckDateComparison(ref txt_mfg, ref txt_exp);
+            validation.CheckDate(ref txt_exp, "Expiry Date");
             MessageCollection.copyFrom(validation.messageCollection);
 
         }
