@@ -579,27 +579,24 @@
         </asp:ScriptManager>
 
         <div class="page-wrapper chiller-theme toggled" runat="server" id="sidebardiv">
-            <div style="width: 100%; height: 45px; background-color: steelblue; background-position-y: top; position: fixed; margin-top: -50px"><a href="#" style="align-content: inherit; color: white; margin-left: 10px; margin-top: 10px; font-size: large"><span style="align-content: center">MedTrack Inventory</span></a></div>
+            <div style="width: 100%; height: 45px; background-color: steelblue; background-position-y: top; position: fixed; margin-top: -50px">
+                <a href="#" style="align-content: inherit; color: white; margin-left: 10px; margin-top: 10px; font-size: large">
+                    <span style="align-content: center">MedTrack Inventory</span></a></div>
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
             </a>
             <nav id="sidebar" class="sidebar-wrapper" runat="server" visible="false">
                 <div class="sidebar-content">
                     <div class="sidebar-brand" style="background-color: steelblue;">
-                        <a href="#" style="color: white; font-size: large">MedTrack Inventory</a>                       
+                        <a href="#" style="color: white; font-size: large">MedTrack Inventory</a>
                     </div>
                     <div class="sidebar-header">
-                        <div class="user-pic">
-                            <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-                                alt="User picture">
-                        </div>
                         <div class="user-info">
-                            <span class="user-name" runat="server" id="spanusername">John                                           
+                            <span class="user-name" runat="server" id="spanusername">
+                                <asp:Label runat="server" ID="lbl_username" Font-Size="Large"></asp:Label>
                             </span>
-                            <span class="user-role" runat="server" id="spanuserrole">Administrator</span>
-                            <span class="user-status">
-                                <i class="fa fa-circle"></i>
-                                <span>Online</span>
+                            <span class="user-role" runat="server" id="spanuserrole">
+                                <asp:Label runat="server" ID="lbl_role" Font-Size="Medium"></asp:Label>
                             </span>
                         </div>
                     </div>
@@ -613,105 +610,28 @@
                             </li>
                             <li>
                                 <a runat="server" id="medPage" visible="false" href="Forms/Medicine.aspx">
-                                    <i class="fa fa-tachometer-alt"></i>
                                     <span style="font-size: small">Medicine</span>
                                 </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Dashboard 1
-                   
-                                                <span class="badge badge-pill badge-success">Pro</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dashboard 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dashboard 3</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li>
                                 <a runat="server" id="pharmacompanypage" visible="false" href="Forms/pharmacompany.aspx">
                                     <span style="font-size: small">Pharmaceutical Company</span>
                                 </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Products
-
-                  </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Orders</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Credit cart</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li>
                                 <a runat="server" id="pharmacypage" visible="false" href="Forms/pharmacy.aspx">
                                     <span style="font-size: small">Pharmacy</span>
                                 </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">General</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Panels</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Tables</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Icons</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Forms</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li>
                                 <a runat="server" id="userspage" visible="false" href="Forms/users.aspx">
                                     <span style="font-size: small">Users</span>
                                 </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Pie chart</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Line chart</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Bar chart</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Histogram</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li>
                                 <a runat="server" id="PosPage" visible="false" href="Forms/pharmacypos.aspx">
                                     <span style="font-size: small">POS</span>
                                 </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Google maps</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Open street map</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li>
                                 <a runat="server" id="pharmaInventory" visible="false" href="Forms/pharmacyinventory.aspx">
@@ -725,7 +645,7 @@
                 <!-- sidebar-content  -->
                 <div class="sidebar-footer" runat="server">
                     <a href="login.aspx">
-                        <span>Log Out</span>
+                        <span><asp:Button runat="server" ID="btn_logout" Width="100%" BackColor="Transparent" BorderStyle="None" Text="Log Out" OnClick="btn_logout_Click"/></span>
                     </a>
                 </div>
             </nav>
@@ -733,8 +653,7 @@
 
 
 
-            <div class="container body-content">
-
+            <div class="container body-content" style="margin-left:18%">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
                 <hr />

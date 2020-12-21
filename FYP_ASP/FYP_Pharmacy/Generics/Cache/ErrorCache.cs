@@ -21,6 +21,9 @@
         
         public const int NoQuantityLeftError = 1000004;
         private static readonly string NoQuantityLeftErrorString = "No Quantity Left for the Following Item Code";
+        
+        public const int InvalidDateError = 1000005;
+        private static readonly string InvalidDateErrorString = "Invalid Date";
 
         public const int GeneralSqlError = 2000000;
         private static readonly string GeneralSqlErrorString = "An Exception Occured while Executing Sql Statement";
@@ -48,6 +51,7 @@
                 case RecordsNotFound: return RecordsNotFoundString;
                 case LoginFailed: return LoginFailedString;
                 case NoQuantityLeftError: return NoQuantityLeftErrorString;
+                case InvalidDateError: return InvalidDateErrorString;
                 default:
                     return UnHandledErrorString;
             }
