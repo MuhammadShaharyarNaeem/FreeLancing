@@ -37,4 +37,3 @@ C:\Users\Muhammad Ammar\source\repos\EmailTest2\EmailTest2\obj\Debug\netcoreapp3
 C:\Users\Muhammad Ammar\source\repos\EmailTest2\EmailTest2\obj\Debug\netcoreapp3.1\EmailingProject.dll
 C:\Users\Muhammad Ammar\source\repos\EmailTest2\EmailTest2\obj\Debug\netcoreapp3.1\EmailingProject.pdb
 C:\Users\Muhammad Ammar\source\repos\EmailTest2\EmailTest2\obj\Debug\netcoreapp3.1\EmailingProject.genruntimeconfig.cache
-C:\Users\Muhammad Ammar\source\repos\EmailTest2\EmailTest2\obj\Debug\netcoreapp3.1\EmailingProject.csprojAssemblyReference.cache

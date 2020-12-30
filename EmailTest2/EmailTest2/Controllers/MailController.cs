@@ -19,7 +19,6 @@ namespace EmailingProject.Controllers
         {
             Config = configuration;
             SqlConnectionString = Config.GetConnectionString("DefaultConnection");
-
         }
         [HttpPost]
         [Route("api/AuthMail")]
@@ -37,12 +36,12 @@ namespace EmailingProject.Controllers
                         if (message.isError)
                         {
                             Response.StatusCode = 400;
-                            return new JsonResult(HttpStatusCode.BadRequest, message);
+                            return new JsonResult(message);
                         }
                         else
                         {
                             Response.StatusCode = 500;
-                            return new JsonResult(HttpStatusCode.InternalServerError);
+                            return new JsonResult("Internal Server Error");
                         }
                     }
                 }
@@ -59,7 +58,7 @@ namespace EmailingProject.Controllers
                     LogType = Enums.LogType.Exception
                 });
             }
-            return new JsonResult(HttpStatusCode.OK,"Suceess");
+            return new JsonResult("Success");
         }
 
         [HttpGet]
@@ -77,18 +76,26 @@ namespace EmailingProject.Controllers
                     {
                         if (message.isError)
                         {
-                            return new JsonResult(HttpStatusCode.BadRequest, messageCollection.Messages[0].ErrorMessage);
+                            return new JsonResult(message);
                         }
                         else
                         {
-                            return new JsonResult(HttpStatusCode.InternalServerError);
+                            return new JsonResult("Internal Server Error");
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                return new JsonResult(HttpStatusCode.InternalServerError, "An Exception Occured" + e.Message);
+                Response.StatusCode = 400;
+                return new JsonResult(new Message()
+                {
+                    Context = "Exception",
+                    ErrorCode = 1,
+                    ErrorMessage = "An Exception Occured during processing: " + e.Message,
+                    isError = true,
+                    LogType = Enums.LogType.Exception
+                });
             }
             return new JsonResult(HttpStatusCode.OK);
         }
