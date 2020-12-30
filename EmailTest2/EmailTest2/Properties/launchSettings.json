@@ -1,0 +1,38 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:4234",
+      "sslPort": 44345
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "weatherforecast",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "EmailFrom": "testemailtesty2@gmail.com",
+        "Password": "msn123456789",
+        "Port": "587",
+        "SMTPAddress": "smtp.gmail.com",
+        "Subject": "HoursAllocation (no-reply)",
+        "HostingUrl": "http://localhost:4234",
+        "EnableSSL": "true",
+        "SqlConnectionString": "Data Source=LAPTOP-SRLK5M4H\\SQLEXPRESS;Initial Catalog=emailproject;Integrated Security=True;"
+      }
+    },
+    "EmailingProject": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "weatherforecast",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
